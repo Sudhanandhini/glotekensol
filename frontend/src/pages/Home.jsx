@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, CheckCircle, Award, ChevronLeft, ChevronRight, Play } from 'lucide-react'
 import { HardHat, Wrench, Box, Blocks, CheckSquare } from 'lucide-react'
@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [currentTestimonial, setCurrentTestimonial] = useState(0)
 
   const heroSlides = [
     {
@@ -51,6 +52,38 @@ const Home = () => {
     }
   ]
 
+  const testimonials = [
+  {
+    name: 'Ravi Kumar',
+    role: 'Project Manager',
+    initial: 'R',
+    text: 'The drawings were accurate and well coordinated.\nTheir team maintained excellent communication throughout the project.\nRevisions were handled quickly without delays.\nWe were very satisfied with the overall quality.'
+  },
+  {
+    name: 'Anita Sharma',
+    role: 'Structural Engineer',
+    initial: 'A',
+    text: 'High-quality detailing with clear and precise drawings.\nThe models helped resolve coordination issues early.\nTheir technical knowledge is impressive.\nWe would confidently work with them again.'
+  },
+  {
+    name: 'David Wilson',
+    role: 'Construction Contractor',
+    initial: 'D',
+    text: 'Erection drawings were clear and easy to follow on site.\nMember marking and sequencing were well planned.\nThis reduced installation time significantly.\nThe project was completed smoothly.'
+  },
+  {
+    name: 'Mohammed Ali',
+    role: 'Fabrication Manager',
+    initial: 'M',
+    text: 'Fabrication drawings were extremely detailed and accurate.\nMaterial lists were clear and complete.\nThis minimized errors during production.\nOverall coordination was excellent.'
+  },
+  {
+    name: 'Priya Nair',
+    role: 'Commercial Client',
+    initial: 'P',
+    text: 'Professional service from concept to delivery.\nThe team understood our requirements clearly.\nDeadlines were met without compromise on quality.\nWe highly recommend their services.'
+  }
+]
 
   const features = [
     'Structural Steel Connection Design',
@@ -61,10 +94,113 @@ const Home = () => {
     'On-time Project Delivery'
   ]
 
-  // Auto-play slider
+  // Counter Animation Hook
+  const useCounter = (end, duration = 2000, startCounting) => {
+    const [count, setCount] = useState(0)
+
+    useEffect(() => {
+      if (!startCounting) return
+
+      let startTime
+      let animationFrame
+
+      const animate = (timestamp) => {
+        if (!startTime) startTime = timestamp
+        const progress = timestamp - startTime
+
+        const percentage = Math.min(progress / duration, 1)
+        const currentCount = Math.floor(percentage * end)
+
+        setCount(currentCount)
+
+        if (percentage < 1) {
+          animationFrame = requestAnimationFrame(animate)
+        }
+      }
+
+      animationFrame = requestAnimationFrame(animate)
+
+      return () => cancelAnimationFrame(animationFrame)
+    }, [end, duration, startCounting])
+
+    return count
+  }
+
+  // Stats with counter
+  const StatsCounter = () => {
+    const [startCounting, setStartCounting] = useState(false)
+    const sectionRef = useRef(null)
+
+    const count1 = useCounter(500, 2000, startCounting)
+    const count2 = useCounter(25, 2000, startCounting)
+    const count3 = useCounter(350, 2000, startCounting)
+    const count4 = useCounter(50, 2000, startCounting)
+
+    useEffect(() => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setStartCounting(true)
+          }
+        },
+        { threshold: 0.3 }
+      )
+
+      if (sectionRef.current) {
+        observer.observe(sectionRef.current)
+      }
+
+      return () => {
+        if (sectionRef.current) {
+          observer.unobserve(sectionRef.current)
+        }
+      }
+    }, [])
+
+    const stats = [
+      { number: count1, suffix: '+', label: 'Projects Completed' },
+      { number: count2, suffix: '+', label: 'Years Experience' },
+      { number: count3, suffix: '+', label: 'Happy Clients' },
+      { number: count4, suffix: '+', label: 'Expert Team' }
+    ]
+
+    return (
+      <section ref={sectionRef} className="py-16 bg-[#001B3D] text-white">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.5 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="text-center group"
+              >
+                <div className="text-5xl md:text-6xl font-bold text-[#FF6B35] mb-2 group-hover:scale-110 transition-transform duration-300">
+                  {stat.number}{stat.suffix}
+                </div>
+                <div className="text-gray-300 text-lg">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  // Auto-play hero slider
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [])
+
+  // Auto-play testimonials slider
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
     }, 5000)
     return () => clearInterval(timer)
   }, [])
@@ -75,6 +211,14 @@ const Home = () => {
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)
+  }
+
+  const nextTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
+  }
+
+  const prevTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)
   }
 
   return (
@@ -180,7 +324,7 @@ const Home = () => {
       </section>
 
       {/* What We Do Section */}
-      <section className="bg-[#FF6B35] py-16 relative overflow-hidden">
+      <section className="py-16 relative overflow-hidden bg-gradient-to-b from-[#FF6B35] from-50% to-white to-50%">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -210,7 +354,7 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className={`group relative overflow-hidden rounded-lg transition-all duration-300 hover:shadow-2xl ${
+                className={`group relative overflow-hidden rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 ${
                   index === 3 ? 'bg-[#001B3D] hover:bg-[#FF6B35]' : 'bg-white hover:bg-[#001B3D]'
                 }`}
               >
@@ -332,113 +476,87 @@ const Home = () => {
         </div>
       </section>
 
-
       <section className="relative overflow-hidden">
-      <div className="grid grid-cols-1 lg:grid-cols-2">
-        {/* Left - Orange Content */}
-        <div className="bg-[#FF6B35] text-white p-8 lg:p-16 flex items-center">
-          <div >
-            <p className="text-sm uppercase tracking-wider mb-4 font-semibold">Who We Are</p>
-            
-            <h2 className="text-4xl lg:text-5xl font-bold text-[#001B3D] mb-6 leading-tight">
-              10+ Years Of Professional Industry Experience.
-            </h2>
-            
-            <div className="space-y-4 mb-8">
-              <p className="text-white leading-relaxed">
-                <strong>WELCOME TO GTES</strong>
-              </p>
-              <p className="text-white leading-relaxed">
-                GTES was established in 2023 as a structural engineering design and detailing company. 
-                We provide Structural Design & Detailing services for all kinds of structures in Imperial 
-                as well as Metric units complying with AISC, Canadian, and Middle-East Standards.
-              </p>
-              <p className="text-white leading-relaxed">
-                We at GTES provide total Steel Detailing & REBAR Detailing solutions to our valued customers 
-                worldwide and assist them in creating outsourcing strategies to build long-term relationships 
-                and harness the power of outsourcing efficiently.
-              </p>
-              <p className="text-white leading-relaxed">
-                Our Expert team of Structural Engineers, Tekla Modelers, Checkers, and Steel detailers has 
-                decades of experience working with AISC codes to execute various Industrial, Commercial buildings 
-                (Small, mid, and high-rise structures), Residential buildings, Super Markets, Malls, Airports, 
-                and Miscellaneous projects (Stairs, Handrails, Ladders, Canopy, Grating Platforms, etc.) on the 
-                expected turnaround time and per your specific requirements.
-              </p>
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2">
+          {/* Left - Orange Content */}
+          <div className="bg-[#FF6B35] text-white p-8 lg:p-16 flex items-center">
+            <div>
+              <p className="text-sm uppercase tracking-wider mb-4 font-semibold">Who We Are</p>
+              
+              <h2 className="text-4xl lg:text-5xl font-bold text-[#001B3D] mb-6 leading-tight">
+                10+ Years Of Professional Industry Experience.
+              </h2>
+              
+              <div className="space-y-4 mb-8">
+                <p className="text-white leading-relaxed">
+                  <strong>WELCOME TO GTES</strong>
+                </p>
+                <p className="text-white leading-relaxed">
+                  GTES was established in 2023 as a structural engineering design and detailing company. 
+                  We provide Structural Design & Detailing services for all kinds of structures in Imperial 
+                  as well as Metric units complying with AISC, Canadian, and Middle-East Standards.
+                </p>
+                <p className="text-white leading-relaxed">
+                  We at GTES provide total Steel Detailing & REBAR Detailing solutions to our valued customers 
+                  worldwide and assist them in creating outsourcing strategies to build long-term relationships 
+                  and harness the power of outsourcing efficiently.
+                </p>
+                <p className="text-white leading-relaxed">
+                  Our Expert team of Structural Engineers, Tekla Modelers, Checkers, and Steel detailers has 
+                  decades of experience working with AISC codes to execute various Industrial, Commercial buildings 
+                  (Small, mid, and high-rise structures), Residential buildings, Super Markets, Malls, Airports, 
+                  and Miscellaneous projects (Stairs, Handrails, Ladders, Canopy, Grating Platforms, etc.) on the 
+                  expected turnaround time and per your specific requirements.
+                </p>
+              </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
-              {features.map((feature, index) => (
-                <div key={index} className="flex items-start gap-2">
-                  <CheckSquare className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                  <span className="text-sm text-white">{feature}</span>
-                </div>
-              ))}
-            </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
+                {features.map((feature, index) => (
+                  <div key={index} className="flex items-start gap-2">
+                    <CheckSquare className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                    <span className="text-sm text-white">{feature}</span>
+                  </div>
+                ))}
+              </div>
 
-            <Link
-              to="/about"
-              className="inline-flex items-center gap-2 bg-[#001B3D] text-white px-8 py-3 rounded hover:bg-[#002447] transition-all duration-300 font-medium"
-            >
-              Read More
-              <span>→</span>
-            </Link>
-          </div>
-        </div>
-
-        {/* Right - Fixed Background Image */}
-        <div
-          className="relative bg-cover bg-center min-h-[600px] flex items-center justify-center"
-          style={{
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1200')`,
-            backgroundAttachment: 'fixed'
-          }}
-        >
-          {/* Play Button */}
-          <div className="text-center z-10">
-            <button className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform mb-6 mx-auto">
-              <Play className="w-8 h-8 text-[#FF6B35] ml-1" fill="#FF6B35" />
-            </button>
-            <div className="text-white max-w-md mx-auto px-4">
-              <p className="text-lg leading-relaxed">
-                There are many variations of passages of Lorem Ipsum available majority have suffered alteration.
-              </p>
-            </div>
-          </div>
-
-          {/* Decorative Circle */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border-4 border-white/20 rounded-full"></div>
-        </div>
-      </div>
-    </section>
-
-      {/* Stats Section */}
-      <section className="py-16 bg-[#001B3D] text-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { number: '500+', label: 'Projects Completed' },
-              { number: '25+', label: 'Years Experience' },
-              { number: '350+', label: 'Happy Clients' },
-              { number: '50+', label: 'Expert Team' }
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.5 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="text-center group"
+              <Link
+                to="/about"
+                className="inline-flex items-center gap-2 bg-[#001B3D] text-white px-8 py-3 rounded hover:bg-[#002447] transition-all duration-300 font-medium"
               >
-                <div className="text-5xl font-bold text-[#FF6B35] mb-2 group-hover:scale-110 transition-transform duration-300">
-                  {stat.number}
-                </div>
-                <div className="text-gray-300">{stat.label}</div>
-              </motion.div>
-            ))}
+                Read More
+                <span>→</span>
+              </Link>
+            </div>
+          </div>
+
+          {/* Right - Fixed Background Image */}
+          <div
+            className="relative bg-cover bg-center min-h-[600px] flex items-center justify-center"
+            style={{
+              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1200')`,
+              backgroundAttachment: 'fixed'
+            }}
+          >
+            {/* Play Button */}
+            <div className="text-center z-10">
+              <button className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform mb-6 mx-auto">
+                <Play className="w-8 h-8 text-[#FF6B35] ml-1" fill="#FF6B35" />
+              </button>
+              <div className="text-white max-w-md mx-auto px-4">
+                <p className="text-lg leading-relaxed">
+                  There are many variations of passages of Lorem Ipsum available majority have suffered alteration.
+                </p>
+              </div>
+            </div>
+
+            {/* Decorative Circle */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border-4 border-white/20 rounded-full"></div>
           </div>
         </div>
       </section>
+
+      {/* Stats Section with Counter */}
+      <StatsCounter />
 
       {/* Services Preview */}
       <section className="py-20 bg-white">
@@ -519,31 +637,9 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-[#FF6B35]">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="flex flex-col md:flex-row items-center justify-between"
-          >
-            <div className="text-white mb-6 md:mb-0">
-              <h3 className="text-3xl font-bold mb-2">Ready to Start Your Project?</h3>
-              <p className="text-white/90">Get in touch with us today for a free consultation and quote.</p>
-            </div>
-            <Link
-              to="/contact"
-              className="bg-[#001B3D] text-white px-8 py-3 rounded hover:bg-[#002447] transition-all duration-300 font-medium hover:shadow-lg transform hover:-translate-y-1"
-            >
-              Contact Us Now
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+     
 
-      {/* Testimonials */}
+      {/* Testimonials Slider */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <motion.div
@@ -553,48 +649,73 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <p className="text-[#FF6B35] mb-2 text-sm uppercase tracking-wide">Testimonials</p>
+            <p className="text-[#FF6B35] mb-2 text-sm uppercase tracking-wide">TESTIMONIALS</p>
             <h2 className="text-4xl font-bold text-[#001B3D]">What Our Clients Say</h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                name: 'John Smith',
-                role: 'Homeowner',
-                text: 'Excellent work! The team was professional, timely, and the quality exceeded our expectations.'
-              },
-              {
-                name: 'Sarah Johnson',
-                role: 'Business Owner',
-                text: 'Outstanding service from start to finish. Our commercial project was completed on time and within budget.'
-              },
-              {
-                name: 'Michael Brown',
-                role: 'Property Developer',
-                text: 'Highly recommend! Their expertise and attention to detail made our project a huge success.'
-              }
-            ].map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+          <div className="relative max-w-5xl mx-auto">
+            {/* Testimonial Cards */}
+            <div className="relative overflow-hidden">
+              <div 
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${currentTestimonial * 100}%)` }}
               >
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-[#FF6B35] rounded-full flex items-center justify-center text-white font-bold text-xl">
-                    {testimonial.name.charAt(0)}
+                {testimonials.map((testimonial, index) => (
+                  <div
+                    key={index}
+                    className="w-full flex-shrink-0 px-4"
+                  >
+                    <motion.div
+                      initial={{ opacity: 0, y: 50 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="bg-white p-8 md:p-12 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+                    >
+                      <div className="flex items-center mb-6">
+                        <div className="w-16 h-16 bg-[#FF6B35] rounded-full flex items-center justify-center text-white font-bold text-2xl flex-shrink-0">
+                          {testimonial.initial}
+                        </div>
+                        <div className="ml-6">
+                          <h4 className="font-bold text-[#001B3D] text-xl">{testimonial.name}</h4>
+                          <p className="text-gray-600">{testimonial.role}</p>
+                        </div>
+                      </div>
+                      <p className="text-gray-700 text-lg italic leading-relaxed">
+                        &ldquo;{testimonial.text}&rdquo;
+                      </p>
+                    </motion.div>
                   </div>
-                  <div className="ml-4">
-                    <h4 className="font-bold text-[#001B3D]">{testimonial.name}</h4>
-                    <p className="text-gray-600 text-sm">{testimonial.role}</p>
-                  </div>
-                </div>
-                <p className="text-gray-600 italic">&ldquo;{testimonial.text}&rdquo;</p>
-              </motion.div>
-            ))}
+                ))}
+              </div>
+            </div>
+
+            {/* Navigation Arrows */}
+            <button
+              onClick={prevTestimonial}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white hover:bg-[#FF6B35] text-[#001B3D] hover:text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-10"
+            >
+              <ChevronLeft size={24} />
+            </button>
+            <button
+              onClick={nextTestimonial}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white hover:bg-[#FF6B35] text-[#001B3D] hover:text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-10"
+            >
+              <ChevronRight size={24} />
+            </button>
+
+            {/* Dots Indicator */}
+            <div className="flex justify-center gap-3 mt-8">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentTestimonial(index)}
+                  className={`transition-all duration-300 rounded-full ${
+                    index === currentTestimonial
+                      ? 'w-12 h-3 bg-[#FF6B35]'
+                      : 'w-3 h-3 bg-gray-300 hover:bg-gray-400'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
