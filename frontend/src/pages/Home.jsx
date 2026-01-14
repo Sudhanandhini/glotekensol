@@ -1,11 +1,22 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, CheckCircle, Award, ChevronLeft, ChevronRight, Play } from 'lucide-react'
-import { HardHat, Wrench, Box, Blocks, CheckSquare } from 'lucide-react'
+import { 
+  ArrowRight, 
+  CheckCircle, 
+  ChevronLeft, 
+  ChevronRight, 
+  Play,  
+  PenTool, 
+  Building2, 
+  CircleDot, 
+  Construction,
+  HardHat, 
+  Wrench, 
+  Box, 
+  Blocks
+} from 'lucide-react'
 import { motion } from 'framer-motion'
-
-import ScrollToTop from '../components/ScrollToTop';
-
+import ScrollToTop from '../components/ScrollToTop'
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -56,45 +67,36 @@ const Home = () => {
   ]
 
   const testimonials = [
-  {
-    name: 'Ravi Kumar',
-    role: 'Project Manager',
-    initial: 'R',
-    text: 'The drawings were accurate and well coordinated.\nTheir team maintained excellent communication throughout the project.\nRevisions were handled quickly without delays.\nWe were very satisfied with the overall quality.'
-  },
-  {
-    name: 'Anita Sharma',
-    role: 'Structural Engineer',
-    initial: 'A',
-    text: 'High-quality detailing with clear and precise drawings.\nThe models helped resolve coordination issues early.\nTheir technical knowledge is impressive.\nWe would confidently work with them again.'
-  },
-  {
-    name: 'David Wilson',
-    role: 'Construction Contractor',
-    initial: 'D',
-    text: 'Erection drawings were clear and easy to follow on site.\nMember marking and sequencing were well planned.\nThis reduced installation time significantly.\nThe project was completed smoothly.'
-  },
-  {
-    name: 'Mohammed Ali',
-    role: 'Fabrication Manager',
-    initial: 'M',
-    text: 'Fabrication drawings were extremely detailed and accurate.\nMaterial lists were clear and complete.\nThis minimized errors during production.\nOverall coordination was excellent.'
-  },
-  {
-    name: 'Priya Nair',
-    role: 'Commercial Client',
-    initial: 'P',
-    text: 'Professional service from concept to delivery.\nThe team understood our requirements clearly.\nDeadlines were met without compromise on quality.\nWe highly recommend their services.'
-  }
-]
-
-  const features = [
-    'Structural Steel Connection Design',
-    'Structural Steel Detailing',
-    'Reinforcement 3D Modelling',
-    'REBAR Detailing Solutions',
-    'AISC Code Compliance',
-    'On-time Project Delivery'
+    {
+      name: 'Ravi Kumar',
+      role: 'Project Manager',
+      initial: 'R',
+      text: 'The drawings were accurate and well coordinated. Their team maintained excellent communication throughout the project. Revisions were handled quickly without delays. We were very satisfied with the overall quality.'
+    },
+    {
+      name: 'Anita Sharma',
+      role: 'Structural Engineer',
+      initial: 'A',
+      text: 'High-quality detailing with clear and precise drawings. The models helped resolve coordination issues early. Their technical knowledge is impressive. We would confidently work with them again.'
+    },
+    {
+      name: 'David Wilson',
+      role: 'Construction Contractor',
+      initial: 'D',
+      text: 'Erection drawings were clear and easy to follow on site. Member marking and sequencing were well planned. This reduced installation time significantly. The project was completed smoothly.'
+    },
+    {
+      name: 'Mohammed Ali',
+      role: 'Fabrication Manager',
+      initial: 'M',
+      text: 'Fabrication drawings were extremely detailed and accurate. Material lists were clear and complete. This minimized errors during production. Overall coordination was excellent.'
+    },
+    {
+      name: 'Priya Nair',
+      role: 'Commercial Client',
+      initial: 'P',
+      text: 'Professional service from concept to delivery. The team understood our requirements clearly. Deadlines were met without compromise on quality. We highly recommend their services.'
+    }
   ]
 
   // Counter Animation Hook
@@ -135,7 +137,7 @@ const Home = () => {
     const sectionRef = useRef(null)
 
     const count1 = useCounter(500, 2000, startCounting)
-    const count2 = useCounter(25, 2000, startCounting)
+    const count2 = useCounter(2, 2000, startCounting)
     const count3 = useCounter(350, 2000, startCounting)
     const count4 = useCounter(50, 2000, startCounting)
 
@@ -198,7 +200,7 @@ const Home = () => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
     }, 5000)
     return () => clearInterval(timer)
-  }, [])
+  }, [heroSlides.length])
 
   // Auto-play testimonials slider
   useEffect(() => {
@@ -206,7 +208,7 @@ const Home = () => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
     }, 5000)
     return () => clearInterval(timer)
-  }, [])
+  }, [testimonials.length])
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
@@ -345,7 +347,7 @@ const Home = () => {
               className="bg-[#001B3D] text-white px-8 py-3 rounded hover:bg-[#002447] transition-all duration-300 font-medium flex items-center gap-2 hover:shadow-lg transform hover:-translate-y-1"
             >
               Discover More
-              <span>→</span>
+              <ArrowRight size={20} />
             </Link>
           </motion.div>
 
@@ -440,14 +442,13 @@ const Home = () => {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <p className="text-[#FF6B35] mb-2 text-sm uppercase tracking-wide">About Company</p>
+              <p className="text-[#FF6B35] mb-2 text-sm uppercase tracking-wide font-semibold">About Company</p>
               <h2 className="text-4xl font-bold text-[#001B3D] mb-4">
                 World's Largest And Trusted Construction Company
               </h2>
               <p className="text-gray-600 mb-6">
-                There are many variations of passages of Lorem Ipsum available, but the majority have suffered
-                alteration in some form, by injected humour, or randomised words which don't look even slightly
-                believable.
+                We provide comprehensive structural engineering design and detailing services for all types of structures, 
+                complying with international standards and delivering excellence in every project.
               </p>
               <div className="space-y-3 mb-6">
                 {[
@@ -479,6 +480,7 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Who We Are Section */}
       <section className="relative overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-2">
           {/* Left - Orange Content */}
@@ -487,7 +489,7 @@ const Home = () => {
               <p className="text-sm uppercase tracking-wider mb-4 font-semibold">Who We Are</p>
               
               <h2 className="text-4xl lg:text-5xl font-bold text-[#001B3D] mb-6 leading-tight">
-                10+ Years Of Professional Industry Experience.
+                2+ Years Of Professional Industry Experience.
               </h2>
               
               <div className="space-y-4 mb-8">
@@ -513,21 +515,12 @@ const Home = () => {
                 </p>
               </div>
 
-              {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
-                {features.map((feature, index) => (
-                  <div key={index} className="flex items-start gap-2">
-                    <CheckSquare className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-white">{feature}</span>
-                  </div>
-                ))}
-              </div> */}
-
               <Link
                 to="/about"
                 className="inline-flex items-center gap-2 bg-[#001B3D] text-white px-8 py-3 rounded hover:bg-[#002447] transition-all duration-300 font-medium"
               >
                 Read More
-                <span>→</span>
+                <ArrowRight size={20} />
               </Link>
             </div>
           </div>
@@ -547,7 +540,7 @@ const Home = () => {
               </button>
               <div className="text-white max-w-md mx-auto px-4">
                 <p className="text-lg leading-relaxed">
-                  There are many variations of passages of Lorem Ipsum available majority have suffered alteration.
+                  Watch how we transform your vision into reality with precision engineering and innovative solutions.
                 </p>
               </div>
             </div>
@@ -561,86 +554,198 @@ const Home = () => {
       {/* Stats Section with Counter */}
       <StatsCounter />
 
-      {/* Services Preview */}
+      {/* Services Preview - Redesigned */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
-            className="text-center mb-12"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.1
+                }
+              }
+            }}
+            className="text-center mb-16"
           >
-            <p className="text-[#FF6B35] mb-2 text-sm uppercase tracking-wide">Our Services</p>
-            <h2 className="text-4xl font-bold text-[#001B3D] mb-4">What We Offer</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              We provide comprehensive construction services for residential, commercial, and industrial projects.
-            </p>
+            <motion.p 
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0 }
+              }}
+              className="text-[#FF6B35] mb-2 text-sm uppercase tracking-wide font-semibold"
+            >
+              Our Services
+            </motion.p>
+            <motion.h2 
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0 }
+              }}
+              className="text-4xl font-bold text-[#001B3D] mb-4"
+            >
+              What We Offer
+            </motion.h2>
+            <motion.p 
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0 }
+              }}
+              className="text-gray-600 max-w-2xl mx-auto"
+            >
+              Specialized structural engineering and construction services using cutting-edge technology and industry expertise.
+            </motion.p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.15
+                }
+              }
+            }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
+          >
             {[
               {
                 img: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600',
-                title: 'Building Construction',
-                desc: 'Complete building construction services from foundation to finishing.'
+                icon: <PenTool className="text-white" size={40} />,
+                title: 'Design Services',
+                desc: 'Professional connection design and structural analysis using advanced engineering software.',
+                link: '/services',
+                gradient: 'from-[#001B3D] to-indigo-700'
               },
               {
                 img: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600',
-                title: 'Renovation & Remodeling',
-                desc: 'Transform your existing space with our expert renovation services.'
+                icon: <Building2 className="text-white" size={40} />,
+                title: 'Structural Steel Detailing',
+                desc: 'Complete steel detailing services including BIM, 3D modeling, and fabrication drawings.',
+                link: '/services',
+                gradient: 'from-orange-500 to-red-600'
               },
               {
                 img: 'https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=600',
-                title: 'Architecture Design',
-                desc: 'Innovative architectural designs that combine beauty and functionality.'
+                icon: <CircleDot className="text-white" size={40} />,
+                title: 'Rebar Detailing',
+                desc: 'Expert rebar detailing with accurate bar bending schedules and placement drawings.',
+                link: '/services',
+                gradient: 'from-[#001B3D] to-indigo-700'
+              },
+              {
+                img: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600',
+                icon: <Construction className="text-white" size={40} />,
+                title: 'Civil Construction',
+                desc: 'Complete civil construction design, estimation, and project management services.',
+                link: '/services',
+                gradient: 'from-orange-500 to-red-600'
               }
             ].map((service, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300"
+                variants={{
+                  hidden: { opacity: 0, y: 50 },
+                  visible: { 
+                    opacity: 1, 
+                    y: 0,
+                    transition: { duration: 0.5 }
+                  }
+                }}
+                whileHover={{ y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300"
               >
-                <img
-                  src={service.img}
-                  alt={service.title}
-                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-6">
-                  <h3 className="text-white text-xl font-bold mb-2">{service.title}</h3>
-                  <p className="text-gray-200 text-sm mb-3">{service.desc}</p>
-                  <Link
-                    to="/services"
-                    className="text-[#FF6B35] font-medium flex items-center hover:gap-2 transition-all"
+                {/* Background Image */}
+                <div className="relative h-80 overflow-hidden">
+                  <motion.img
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.6 }}
+                    src={service.img}
+                    alt={service.title}
+                    className="w-full h-full object-cover"
+                  />
+                  {/* Gradient Overlay */}
+                  <div className={`absolute inset-0 bg-gradient-to-t ${service.gradient} opacity-60 group-hover:opacity-75 transition-opacity duration-300`}></div>
+                </div>
+
+                {/* Content */}
+                <div className="absolute inset-0 flex flex-col justify-end p-6">
+                  {/* Icon */}
+                  <motion.div 
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 + 0.3, type: "spring", stiffness: 200 }}
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 shadow-lg"
                   >
-                    Learn More <ArrowRight className="ml-1" size={16} />
+                    {service.icon}
+                  </motion.div>
+
+                  {/* Title */}
+                  <h3 className="text-white text-2xl font-bold mb-3">
+                    {service.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-white/90 text-sm mb-4 line-clamp-2 group-hover:line-clamp-none transition-all">
+                    {service.desc}
+                  </p>
+
+                  {/* Learn More Link */}
+                  <Link
+                    to={service.link}
+                    className="inline-flex items-center text-white font-semibold hover:gap-2 transition-all duration-300"
+                  >
+                    Learn More 
+                    <motion.div
+                      whileHover={{ x: 5 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <ArrowRight className="ml-1" size={18} />
+                    </motion.div>
                   </Link>
                 </div>
+
+                {/* Decorative Corner */}
+                <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 transform rotate-45 translate-x-10 -translate-y-10 group-hover:scale-150 transition-transform duration-500"></div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
 
+          {/* View All Button */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
             viewport={{ once: true }}
             className="text-center"
           >
-            <Link
-              to="/services"
-              className="bg-[#FF6B35] text-white px-8 py-3 rounded hover:bg-[#ff5722] transition-all duration-300 font-medium inline-block hover:shadow-lg transform hover:-translate-y-1"
-            >
-              View All Services
+            <Link to="/services">
+              <motion.button
+                whileHover={{ 
+                  scale: 1.05, 
+                  boxShadow: "0 10px 40px rgba(255, 107, 53, 0.3)" 
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-[#FF6B35] text-white px-10 py-4 rounded-lg hover:bg-[#ff5722] transition-all duration-300 font-semibold inline-flex items-center space-x-2 shadow-lg"
+              >
+                <span>View All Services</span>
+                <ArrowRight size={20} />
+              </motion.button>
             </Link>
           </motion.div>
         </div>
       </section>
-
-     
 
       {/* Testimonials Slider */}
       <section className="py-20 bg-gray-50">
@@ -652,7 +757,7 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <p className="text-[#FF6B35] mb-2 text-sm uppercase tracking-wide">TESTIMONIALS</p>
+            <p className="text-[#FF6B35] mb-2 text-sm uppercase tracking-wide font-semibold">TESTIMONIALS</p>
             <h2 className="text-4xl font-bold text-[#001B3D]">What Our Clients Say</h2>
           </motion.div>
 
@@ -682,7 +787,7 @@ const Home = () => {
                           <p className="text-gray-600">{testimonial.role}</p>
                         </div>
                       </div>
-                      <p className="text-gray-700 text-lg italic leading-relaxed">
+                      <p className="text-gray-700 text-lg leading-relaxed">
                         &ldquo;{testimonial.text}&rdquo;
                       </p>
                     </motion.div>
@@ -723,8 +828,7 @@ const Home = () => {
         </div>
       </section>
 
- <ScrollToTop />
-
+      <ScrollToTop />
     </div>
   )
 }
