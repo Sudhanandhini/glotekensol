@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Link, useLocation,  NavLink } from 'react-router-dom'
-import { Menu, X, Facebook, Twitter, Linkedin, Instagram, ArrowRight, MapPin, Mail, Users, ChevronDown } from 'lucide-react'
+import { Link, useLocation, NavLink } from 'react-router-dom'
+import { Menu, X, Facebook, Twitter, Linkedin, Instagram, MapPin, Mail, Users, ChevronDown } from 'lucide-react'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -23,15 +23,15 @@ const Header = () => {
         { name: 'Structural Steel Detailing', path: '/structural-steel-detailing' },
         { name: 'Steel BIM Services', path: '/steel-bim-services' },
         { name: 'Steel 3D Modelling', path: '/steel-3d-modelling' },
-        { name: 'Point Cloud 3D Modelling', path: '/steel-point-cloud' },
-        { name: 'Estimate and Costing', path: '/estimate-costing' }
+        { name: 'Point Cloud 3D Modelling', path: '/point-cloud-3d-modelling' },
+        { name: 'Estimate and Costing', path: '/estimate-and-costing' }
       ]
     },
     {
       category: 'Rebar Detailing',
       items: [
         { name: 'Rebar Detailing', path: '/rebar-detailing' },
-        { name: 'Rebar Quantity Estimation', path: '/rebar-estimation' },
+        { name: 'Rebar Quantity Estimation', path: '/rebar-quantity-estimation' },
         { name: 'Rebar 3D Modelling', path: '/rebar-3d-modelling' }
       ]
     },
@@ -39,9 +39,9 @@ const Header = () => {
       category: 'Civil Construction',
       items: [
         { name: 'Civil Construction Design', path: '/civil-construction-design' },
-        { name: 'Civil Estimation & Costing', path: '/civil-estimation' },
-        { name: 'Civil Construction Services', path: '/civil-services' },
-        { name: 'Civil Renovation Works', path: '/civil-renovation' }
+        { name: 'Civil Estimation & Costing', path: '/civil-estimation-costing' },
+        { name: 'Civil Construction Services', path: '/civil-construction-services' },
+        { name: 'Civil Renovation Works', path: '/civil-renovation-works' }
       ]
     }
   ]
@@ -96,26 +96,22 @@ const Header = () => {
           <div className="flex justify-between items-center py-4">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2">
-              {/* <div className="flex items-center">
-                <ArrowRight className="text-[#FF6B35] w-10 h-10 rotate-180" strokeWidth={3} />
-                <ArrowRight className="text-[#FF6B35] w-10 h-10 -ml-5" strokeWidth={3} />
-              </div> */}
               <span className="text-[#FF6B35] text-4xl font-bold">Glotekensol</span>
             </Link>
 
             {/* Desktop Menu */}
             <div className="hidden lg:flex items-center gap-8">
-            <NavLink
-  to="/"
-  end
-  className={({ isActive }) =>
-    `font-medium transition ${
-      isActive ? 'text-[#FF6B35]' : 'text-gray-700 hover:text-[#FF6B35]'
-    }`
-  }
->
-  Home
-</NavLink>
+              <NavLink
+                to="/"
+                end
+                className={({ isActive }) =>
+                  `font-medium transition ${
+                    isActive ? 'text-[#FF6B35]' : 'text-gray-700 hover:text-[#FF6B35]'
+                  }`
+                }
+              >
+                Home
+              </NavLink>
 
               <Link 
                 to="/about" 
@@ -124,18 +120,32 @@ const Header = () => {
                 About
               </Link>
               
-              {/* Services Mega Menu - FIXED VERSION */}
+              {/* Services Mega Menu with Clickable Link */}
               <div 
                 className="relative"
                 onMouseEnter={() => setActiveDropdown('services')}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
-                <button className="font-medium text-gray-700 hover:text-[#FF6B35] transition flex items-center gap-1 py-2">
-                  Services
-                  <ChevronDown size={16} className={`transition-transform ${activeDropdown === 'services' ? 'rotate-180' : ''}`} />
-                </button>
+                <div className="flex items-center gap-1">
+                  <Link 
+                    to="/services"
+                    className={`font-medium transition ${
+                      isActive('/services') || location.pathname.startsWith('/services/') 
+                        ? 'text-[#FF6B35]' 
+                        : 'text-gray-700 hover:text-[#FF6B35]'
+                    }`}
+                  >
+                    Services
+                  </Link>
+                  <button className="text-gray-700 hover:text-[#FF6B35] transition py-2">
+                    <ChevronDown 
+                      size={16} 
+                      className={`transition-transform ${activeDropdown === 'services' ? 'rotate-180' : ''}`} 
+                    />
+                  </button>
+                </div>
                 
-                {/* Mega Menu Dropdown - NO GAP, CONTINUOUS HOVER AREA */}
+                {/* Mega Menu Dropdown */}
                 {activeDropdown === 'services' && (
                   <div className="absolute left-0 top-full pt-2 z-50">
                     <div className="bg-white shadow-2xl rounded-lg overflow-hidden min-w-[800px] border border-gray-200">
@@ -203,22 +213,44 @@ const Header = () => {
           {/* Mobile Menu */}
           {isMenuOpen && (
             <div className="lg:hidden pb-4 space-y-2">
-              <Link to="/" className="block py-2 text-gray-700 hover:text-[#FF6B35]" onClick={() => setIsMenuOpen(false)}>
+              <Link 
+                to="/" 
+                className="block py-2 text-gray-700 hover:text-[#FF6B35]" 
+                onClick={() => setIsMenuOpen(false)}
+              >
                 Home
               </Link>
-              <Link to="/about" className="block py-2 text-gray-700 hover:text-[#FF6B35]" onClick={() => setIsMenuOpen(false)}>
+              <Link 
+                to="/about" 
+                className="block py-2 text-gray-700 hover:text-[#FF6B35]" 
+                onClick={() => setIsMenuOpen(false)}
+              >
                 About
               </Link>
               
-              {/* Mobile Services Submenu */}
+              {/* Mobile Services with Clickable Link */}
               <div>
-                <button 
-                  className="w-full text-left py-2 text-gray-700 hover:text-[#FF6B35] flex items-center justify-between"
-                  onClick={() => setActiveDropdown(activeDropdown === 'services-mobile' ? null : 'services-mobile')}
-                >
-                  Services
-                  <ChevronDown size={16} className={`transition-transform ${activeDropdown === 'services-mobile' ? 'rotate-180' : ''}`} />
-                </button>
+                <div className="flex items-center justify-between">
+                  <Link 
+                    to="/services"
+                    className="flex-1 py-2 text-gray-700 hover:text-[#FF6B35]"
+                    onClick={() => {
+                      setIsMenuOpen(false)
+                      setActiveDropdown(null)
+                    }}
+                  >
+                    Services
+                  </Link>
+                  <button 
+                    className="py-2 px-2 text-gray-700 hover:text-[#FF6B35]"
+                    onClick={() => setActiveDropdown(activeDropdown === 'services-mobile' ? null : 'services-mobile')}
+                  >
+                    <ChevronDown 
+                      size={16} 
+                      className={`transition-transform ${activeDropdown === 'services-mobile' ? 'rotate-180' : ''}`} 
+                    />
+                  </button>
+                </div>
                 
                 {activeDropdown === 'services-mobile' && (
                   <div className="pl-4 space-y-2 mt-2">
@@ -244,13 +276,25 @@ const Header = () => {
                 )}
               </div>
 
-              <Link to="/gallery" className="block py-2 text-gray-700 hover:text-[#FF6B35]" onClick={() => setIsMenuOpen(false)}>
+              <Link 
+                to="/gallery" 
+                className="block py-2 text-gray-700 hover:text-[#FF6B35]" 
+                onClick={() => setIsMenuOpen(false)}
+              >
                 Gallery
               </Link>
-              <Link to="/careers" className="block py-2 text-gray-700 hover:text-[#FF6B35]" onClick={() => setIsMenuOpen(false)}>
+              <Link 
+                to="/careers" 
+                className="block py-2 text-gray-700 hover:text-[#FF6B35]" 
+                onClick={() => setIsMenuOpen(false)}
+              >
                 Careers
               </Link>
-              <Link to="/contact" className="block py-2 text-gray-700 hover:text-[#FF6B35]" onClick={() => setIsMenuOpen(false)}>
+              <Link 
+                to="/contact" 
+                className="block py-2 text-gray-700 hover:text-[#FF6B35]" 
+                onClick={() => setIsMenuOpen(false)}
+              >
                 Contact
               </Link>
               <Link 
