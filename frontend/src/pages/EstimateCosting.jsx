@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { X } from 'lucide-react'
 import { motion } from 'framer-motion'
 
+import ScrollToTop from '../components/ScrollToTop';
+
 import img1 from "../assets/fourth/1.jpg"
 import img2 from "../assets/fourth/2.jpg"
 import img3 from "../assets/fourth/3.jpg"
@@ -412,6 +414,9 @@ const EstimateCosting = () => {
           </a>
         </div>
       </section>
+
+ <ScrollToTop />
+
     </div>
   )
 }

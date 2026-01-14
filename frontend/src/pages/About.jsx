@@ -1,147 +1,432 @@
 import { CheckCircle, Award, Users, Target, Eye } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { useInView } from 'framer-motion'
+import { useRef, useState, useEffect } from 'react'
+import { Handshake, Lightbulb, Star } from 'lucide-react'
+
+
+import ScrollToTop from '../components/ScrollToTop';
+
+
+
+// Animated Counter Component
+const AnimatedCounter = ({ end, duration = 2, suffix = '' }) => {
+  const [count, setCount] = useState(0)
+  const countRef = useRef(null)
+  const isInView = useInView(countRef, { once: true })
+
+  useEffect(() => {
+    if (!isInView) return
+
+    let startTime
+    let animationFrame
+
+    const animate = (timestamp) => {
+      if (!startTime) startTime = timestamp
+      const progress = (timestamp - startTime) / (duration * 1000)
+
+      if (progress < 1) {
+        setCount(Math.floor(end * progress))
+        animationFrame = requestAnimationFrame(animate)
+      } else {
+        setCount(end)
+      }
+    }
+
+    animationFrame = requestAnimationFrame(animate)
+    return () => cancelAnimationFrame(animationFrame)
+  }, [end, duration, isInView])
+
+  return <span ref={countRef}>{count}{suffix}</span>
+}
+
+// Animation Variants
+const fadeInUp = {
+  hidden: { opacity: 0, y: 60 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" }
+  }
+}
+
+const fadeInLeft = {
+  hidden: { opacity: 0, x: -60 },
+  visible: { 
+    opacity: 1, 
+    x: 0,
+    transition: { duration: 0.6, ease: "easeOut" }
+  }
+}
+
+const fadeInRight = {
+  hidden: { opacity: 0, x: 60 },
+  visible: { 
+    opacity: 1, 
+    x: 0,
+    transition: { duration: 0.6, ease: "easeOut" }
+  }
+}
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+}
+
+const scaleIn = {
+  hidden: { scale: 0.8, opacity: 0 },
+  visible: { 
+    scale: 1, 
+    opacity: 1,
+    transition: { duration: 0.5, ease: "easeOut" }
+  }
+}
 
 const About = () => {
   return (
     <div>
       {/* Page Header */}
-      <section className="relative h-[300px] bg-cover bg-center" style={{
+      <section className="relative h-[300px] bg-cover bg-center overflow-hidden" style={{
         backgroundImage: "linear-gradient(rgba(0, 27, 61, 0.8), rgba(0, 27, 61, 0.8)), url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600')"
       }}>
-        <div className="container mx-auto px-4 h-full flex items-center justify-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="container mx-auto px-4 h-full flex items-center justify-center"
+        >
           <div className="text-center text-white">
-            <h1 className="text-5xl font-bold mb-4">About Us</h1>
-            <p className="text-xl">Building Excellence Since 1999</p>
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-5xl font-bold mb-4"
+            >
+              About Us
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-xl"
+            >
+              Building Excellence Since 1999
+            </motion.p>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* About Content */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <p className="text-[#FF6B35] mb-2 text-sm uppercase tracking-wide">About Emuo</p>
-              <h2 className="text-4xl font-bold text-[#001B3D] mb-4">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fadeInLeft}
+            >
+              <motion.p 
+                variants={fadeInUp}
+                className="text-[#FF6B35] mb-2 text-sm uppercase tracking-wide font-semibold"
+              >
+                About Emuo
+              </motion.p>
+              <motion.h2 
+                variants={fadeInUp}
+                className="text-4xl font-bold text-[#001B3D] mb-4"
+              >
                 World's Largest And Trusted Construction Company
-              </h2>
-              <p className="text-gray-600 mb-4">
-                With over 25 years of experience in the construction industry, we have established ourselves as leaders in delivering quality projects on time and within budget. Our commitment to excellence and customer satisfaction sets us apart.
-              </p>
-              <p className="text-gray-600 mb-6">
+              </motion.h2>
+              <motion.p 
+                variants={fadeInUp}
+                className="text-gray-600 mb-4"
+              >
+               We at GTES, provides total Steel Detailing & REBAR Detailing solutions to our valued customers worldwide and assist them in creating outsourcing strategies to build long term relationships and harness the power of outsourcing efficiently.
+
+We make the most of our highly qualified human resources and modern-day techniques to deliver projects before deadlines.
+Our transparent way of functioning has helped us win many more customers, who now trust us with their future projects as well.
+
+We offer a range of services, including structural steel detailing, rebar detailing, and 3D modelling. Our services are designed to help our clients achieve maximum efficiency, safety, and cost-effectiveness in their construction projects.
+
+We use the latest technology and software to ensure that our services are accurate and up to date with industry standards. Our team is dedicated to continuous learning and staying up to date with the latest trends and techniques in steel and rebar detailing.
+ At our company, we believe that transparency is key to a successful project. That’s why we work closely with our clients to understand their needs and provide customized solutions that meet their unique requirements. 
+
+Thank you for considering our services. We look forward to working with you and helping you achieve your goals in the construction industry. Contact us today to learn more about our steel and rebar detailing services.  </motion.p>
+              {/* <motion.p 
+                variants={fadeInUp}
+                className="text-gray-600 mb-6"
+              >
                 We specialize in residential, commercial, and industrial construction projects. Our team of skilled professionals uses the latest technology and construction methods to ensure superior results.
-              </p>
-              <div className="space-y-3 mb-6">
-                <div className="flex items-start">
-                  <CheckCircle className="text-[#FF6B35] mr-3 mt-1 flex-shrink-0" size={20} />
-                  <p className="text-gray-600">Expert team with decades of combined experience in construction</p>
-                </div>
-                <div className="flex items-start">
-                  <CheckCircle className="text-[#FF6B35] mr-3 mt-1 flex-shrink-0" size={20} />
-                  <p className="text-gray-600">State-of-the-art equipment and modern construction techniques</p>
-                </div>
-                <div className="flex items-start">
-                  <CheckCircle className="text-[#FF6B35] mr-3 mt-1 flex-shrink-0" size={20} />
-                  <p className="text-gray-600">Commitment to safety, quality, and environmental sustainability</p>
-                </div>
-                <div className="flex items-start">
-                  <CheckCircle className="text-[#FF6B35] mr-3 mt-1 flex-shrink-0" size={20} />
-                  <p className="text-gray-600">Comprehensive project management from concept to completion</p>
-                </div>
-              </div>
-            </div>
-            <div className="relative">
-              <img 
+              </motion.p> */}
+              {/* <motion.div 
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="space-y-3 mb-6"
+              >
+                {[
+                  'Expert team with decades of combined experience in construction',
+                  'State-of-the-art equipment and modern construction techniques',
+                  'Commitment to safety, quality, and environmental sustainability',
+                  'Comprehensive project management from concept to completion'
+                ].map((text, index) => (
+                  <motion.div 
+                    key={index}
+                    variants={fadeInUp}
+                    className="flex items-start group"
+                  >
+                    <CheckCircle className="text-[#FF6B35] mr-3 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform duration-300" size={20} />
+                    <p className="text-gray-600">{text}</p>
+                  </motion.div>
+                ))}
+              </motion.div> */}
+            </motion.div>
+            
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fadeInRight}
+              className="relative"
+            >
+              <motion.img 
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
                 src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800" 
                 alt="Construction Site" 
                 className="rounded-lg shadow-xl"
               />
-              <div className="absolute -bottom-6 -left-6 bg-[#FF6B35] text-white p-8 rounded-lg shadow-lg">
-                <div className="text-5xl font-bold mb-1">500+</div>
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.5 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="absolute -bottom-6 -left-6 bg-[#FF6B35] text-white p-8 rounded-lg shadow-lg"
+              >
+                <div className="text-5xl font-bold mb-1">
+                  <AnimatedCounter end={500} suffix="+" />
+                </div>
                 <div className="text-sm">Completed Projects</div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Mission & Vision */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white p-8 rounded-lg shadow-lg">
-              <div className="flex items-center mb-4">
-                <Target className="text-[#FF6B35] mr-3" size={40} />
-                <h3 className="text-2xl font-bold text-[#001B3D]">Our Mission</h3>
-              </div>
-              <p className="text-gray-600 leading-relaxed">
-                To deliver exceptional construction services that exceed client expectations while maintaining the highest standards of quality, safety, and sustainability. We strive to build lasting relationships with our clients through trust, integrity, and outstanding results.
-              </p>
-            </div>
-            
-            <div className="bg-white p-8 rounded-lg shadow-lg">
-              <div className="flex items-center mb-4">
-                <Eye className="text-[#FF6B35] mr-3" size={40} />
-                <h3 className="text-2xl font-bold text-[#001B3D]">Our Vision</h3>
-              </div>
-              <p className="text-gray-600 leading-relaxed">
-                To be the most trusted and respected construction company, recognized for innovation, quality craftsmanship, and exceptional customer service. We envision a future where we continue to shape skylines and communities while promoting sustainable building practices.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+   
 
-    
+      {/* Mission, Vision & Values Section - Redesigned */}
+<section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+  <div className="container mx-auto px-4">
+    {/* Optional Section Header */}
+    <motion.div 
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      variants={fadeInUp}
+      className="text-center mb-16"
+    >
+      <motion.p 
+        initial={{ opacity: 0, scale: 0 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        className="text-[#FF6B35] mb-2 text-sm uppercase tracking-wide font-semibold"
+      >
+        Our Foundation
+      </motion.p>
+      <h2 className="text-4xl font-bold text-[#001B3D]">
+        What Drives Us Forward
+      </h2>
+    </motion.div>
 
+    <motion.div 
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10"
+    >
+      {/* Our Mission */}
+      <motion.div 
+        variants={scaleIn}
+        whileHover={{ 
+          y: -15, 
+          boxShadow: "0 25px 60px rgba(255, 107, 53, 0.15)" 
+        }}
+        transition={{ duration: 0.3 }}
+        className="bg-white p-10 rounded-3xl shadow-lg text-center group relative overflow-hidden"
+      >
+        {/* Decorative Background Effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        
+        <motion.div
+          whileHover={{ scale: 1.15, rotate: 360 }}
+          transition={{ duration: 0.7, type: "spring" }}
+          className="relative w-28 h-28 bg-gradient-to-br from-[#FF6B35] to-[#FF8C5A] rounded-full flex items-center justify-center mx-auto mb-8 shadow-2xl"
+        >
+          <Handshake className="text-white" size={48} strokeWidth={2} />
+        </motion.div>
+        
+        <h3 className="relative text-2xl font-bold text-[#001B3D] mb-5 uppercase tracking-wide">
+          Our Mission
+        </h3>
+        <p className="relative text-gray-600 leading-relaxed text-base">
+          Integrity, reliability, transparency is and passion towards everything we are involved in.
+        </p>
+      </motion.div>
+
+      {/* Our Vision */}
+      <motion.div 
+        variants={scaleIn}
+        whileHover={{ 
+          y: -15, 
+          boxShadow: "0 25px 60px rgba(255, 107, 53, 0.15)" 
+        }}
+        transition={{ duration: 0.3 }}
+        className="bg-white p-10 rounded-3xl shadow-lg text-center group relative overflow-hidden"
+      >
+        {/* Decorative Background Effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        
+        <motion.div
+          whileHover={{ scale: 1.15, rotate: 360 }}
+          transition={{ duration: 0.7, type: "spring" }}
+          className="relative w-28 h-28 bg-gradient-to-br from-[#FF6B35] to-[#FF8C5A] rounded-full flex items-center justify-center mx-auto mb-8 shadow-2xl"
+        >
+          <Lightbulb className="text-white" size={48} strokeWidth={2} />
+        </motion.div>
+        
+        <h3 className="relative text-2xl font-bold text-[#001B3D] mb-5 uppercase tracking-wide">
+          Our Vision
+        </h3>
+        <p className="relative text-gray-600 leading-relaxed text-base">
+          Everyday we aspire and endeavor to create an better world with our team and services.
+        </p>
+      </motion.div>
+
+      {/* Our Value */}
+      <motion.div 
+        variants={scaleIn}
+        whileHover={{ 
+          y: -15, 
+          boxShadow: "0 25px 60px rgba(255, 107, 53, 0.15)" 
+        }}
+        transition={{ duration: 0.3 }}
+        className="bg-white p-10 rounded-3xl shadow-lg text-center group relative overflow-hidden"
+      >
+        {/* Decorative Background Effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        
+        <motion.div
+          whileHover={{ scale: 1.15, rotate: 360 }}
+          transition={{ duration: 0.7, type: "spring" }}
+          className="relative w-28 h-28 bg-gradient-to-br from-[#FF6B35] to-[#FF8C5A] rounded-full flex items-center justify-center mx-auto mb-8 shadow-2xl"
+        >
+          <Star className="text-white" size={48} strokeWidth={2} fill="white" />
+        </motion.div>
+        
+        <h3 className="relative text-2xl font-bold text-[#001B3D] mb-5 uppercase tracking-wide">
+          Our Value
+        </h3>
+        <p className="relative text-gray-600 leading-relaxed text-base">
+          Delight our Customer. Strive for excellence. and be the BEST
+        </p>
+      </motion.div>
+    </motion.div>
+  </div>
+</section>
 
       {/* Experience Section */}
       <section className="py-20 bg-[#001B3D] text-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl font-bold mb-4">25+ Years Of Professional Industry Experience</h2>
-              <p className="text-gray-300 mb-6">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fadeInLeft}
+            >
+              <motion.h2 
+                variants={fadeInUp}
+                className="text-4xl font-bold mb-4"
+              >
+                25+ Years Of Professional Industry Experience
+              </motion.h2>
+              <motion.p 
+                variants={fadeInUp}
+                className="text-gray-300 mb-6"
+              >
                 Since our founding in 1999, we have grown from a small local contractor to one of the most respected construction companies in the region. Our success is built on a foundation of quality workmanship, innovative solutions, and unwavering commitment to our clients.
-              </p>
-              <ul className="space-y-3">
-                <li className="flex items-center">
-                  <CheckCircle className="text-[#FF6B35] mr-3" size={20} />
-                  Professional and certified construction team
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="text-[#FF6B35] mr-3" size={20} />
-                  Licensed, bonded, and fully insured
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="text-[#FF6B35] mr-3" size={20} />
-                  Comprehensive warranty on all projects
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="text-[#FF6B35] mr-3" size={20} />
-                  24/7 customer support and emergency services
-                </li>
-              </ul>
-            </div>
-            <div className="relative">
-              <img 
+              </motion.p>
+              <motion.ul 
+                variants={staggerContainer}
+                className="space-y-3"
+              >
+                {[
+                  'Professional and certified construction team',
+                  'Licensed, bonded, and fully insured',
+                  'Comprehensive warranty on all projects',
+                  '24/7 customer support and emergency services'
+                ].map((text, index) => (
+                  <motion.li 
+                    key={index}
+                    variants={fadeInUp}
+                    className="flex items-center group"
+                  >
+                    <CheckCircle className="text-[#FF6B35] mr-3 group-hover:scale-110 transition-transform duration-300" size={20} />
+                    {text}
+                  </motion.li>
+                ))}
+              </motion.ul>
+            </motion.div>
+            
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fadeInRight}
+              className="relative"
+            >
+              <motion.img 
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
                 src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800" 
                 alt="Construction Team" 
                 className="rounded-lg shadow-xl"
               />
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-        {/* Why Choose Us */}
+      {/* Why Choose Us */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <p className="text-[#FF6B35] mb-2 text-sm uppercase tracking-wide">Why Choose Us</p>
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fadeInUp}
+            className="text-center mb-12"
+          >
+            <p className="text-[#FF6B35] mb-2 text-sm uppercase tracking-wide font-semibold">Why Choose Us</p>
             <h2 className="text-4xl font-bold text-[#001B3D]">What Makes Us Different</h2>
-          </div>
+          </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <motion.div 
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          >
             {[
               {
                 icon: <Award className="text-[#FF6B35]" size={48} />,
@@ -159,78 +444,122 @@ const About = () => {
                 desc: 'Rigorous quality control processes ensure every project meets our exacting standards and client requirements.'
               }
             ].map((item, index) => (
-              <div key={index} className="text-center p-6 hover:shadow-xl transition-shadow rounded-lg">
-                <div className="flex justify-center mb-4">{item.icon}</div>
+              <motion.div 
+                key={index}
+                variants={scaleIn}
+                whileHover={{ y: -10, boxShadow: "0 20px 50px rgba(0, 0, 0, 0.1)" }}
+                transition={{ duration: 0.3 }}
+                className="text-center p-6 hover:shadow-xl transition-all rounded-lg bg-gray-50"
+              >
+                <motion.div 
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex justify-center mb-4"
+                >
+                  {item.icon}
+                </motion.div>
                 <h3 className="text-xl font-bold text-[#001B3D] mb-3">{item.title}</h3>
                 <p className="text-gray-600">{item.desc}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="py-16 bg-[#FF6B35]">
+      {/* Stats with Animated Counters */}
+      <section className="py-16 bg-[#FF6B35] overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
-            <div>
-              <div className="text-5xl font-bold mb-2">500+</div>
-              <div className="text-white/90">Projects Completed</div>
-            </div>
-            <div>
-              <div className="text-5xl font-bold mb-2">25+</div>
-              <div className="text-white/90">Years Experience</div>
-            </div>
-            <div>
-              <div className="text-5xl font-bold mb-2">350+</div>
-              <div className="text-white/90">Happy Clients</div>
-            </div>
-            <div>
-              <div className="text-5xl font-bold mb-2">50+</div>
-              <div className="text-white/90">Expert Team</div>
-            </div>
-          </div>
+          <motion.div 
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white"
+          >
+            {[
+              { end: 500, suffix: '+', label: 'Projects Completed' },
+              { end: 25, suffix: '+', label: 'Years Experience' },
+              { end: 350, suffix: '+', label: 'Happy Clients' },
+              { end: 50, suffix: '+', label: 'Expert Team' }
+            ].map((stat, index) => (
+              <motion.div 
+                key={index}
+                variants={fadeInUp}
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="text-5xl font-bold mb-2">
+                  <AnimatedCounter end={stat.end} suffix={stat.suffix} duration={2.5} />
+                </div>
+                <div className="text-white/90">{stat.label}</div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
-
-      
       {/* Team Section */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <p className="text-[#FF6B35] mb-2 text-sm uppercase tracking-wide">Our Team</p>
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fadeInUp}
+            className="text-center mb-12"
+          >
+            <p className="text-[#FF6B35] mb-2 text-sm uppercase tracking-wide font-semibold">Our Team</p>
             <h2 className="text-4xl font-bold text-[#001B3D]">Meet Our Experts</h2>
-          </div>
+          </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <motion.div 
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid grid-cols-1 md:grid-cols-4 gap-6"
+          >
             {[
               { name: 'John Anderson', role: 'CEO & Founder', img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400' },
               { name: 'Sarah Williams', role: 'Project Manager', img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400' },
               { name: 'Michael Chen', role: 'Chief Engineer', img: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400' },
               { name: 'Emily Davis', role: 'Architect', img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400' }
             ].map((member, index) => (
-              <div key={index} className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition group">
+              <motion.div 
+                key={index}
+                variants={scaleIn}
+                whileHover={{ y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+              >
                 <div className="relative overflow-hidden">
-                  <img 
+                  <motion.img 
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.5 }}
                     src={member.img} 
                     alt={member.name} 
-                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-64 object-cover"
                   />
-                  <div className="absolute inset-0 bg-[#FF6B35]/0 group-hover:bg-[#FF6B35]/20 transition-colors duration-300"></div>
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute inset-0 bg-[#FF6B35]/20"
+                  ></motion.div>
                 </div>
                 <div className="p-6 text-center">
                   <h3 className="text-xl font-bold text-[#001B3D] mb-1">{member.name}</h3>
                   <p className="text-gray-600 text-sm">{member.role}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
 
 
+ <ScrollToTop />
 
     </div>
   )

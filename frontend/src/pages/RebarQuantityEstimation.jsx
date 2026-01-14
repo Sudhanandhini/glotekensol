@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 
-
+import ScrollToTop from '../components/ScrollToTop';
 
 
 import img1 from "../assets/g1.jpg"
@@ -490,6 +490,10 @@ const RebarQuantityEstimation = () => {
           </motion.div>
         </div>
       </section>
+
+ <ScrollToTop />
+
+
     </div>
   )
 }

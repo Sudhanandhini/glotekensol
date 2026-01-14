@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 
-
+import ScrollToTop from '../components/ScrollToTop';
 
 import img1 from "../assets/g1.jpg"
 import img2 from "../assets/g2.jpg"
@@ -507,6 +507,10 @@ const EstimationAndCosting = () => {
           </motion.div>
         </div>
       </section>
+
+ <ScrollToTop />
+
+
     </div>
   )
 }

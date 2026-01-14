@@ -10,7 +10,7 @@ import img1 from "../assets/j1.jpg"
 import img3 from "../assets/j3.jpg"
 
 
-
+import ScrollToTop from '../components/ScrollToTop';
 
 
 
@@ -437,6 +437,9 @@ const RenovationWorks = () => {
           </motion.div>
         </div>
       </section>
+
+ <ScrollToTop />
+
     </div>
   )
 }

@@ -10,7 +10,7 @@ import img2 from "../assets/e2.jpg"
 import img3 from "../assets/e3.jpg"
 import img4 from "../assets/e4.jpg"
 
-
+import ScrollToTop from '../components/ScrollToTop';
 
 
 
@@ -395,6 +395,10 @@ const Structural3DModeling = () => {
           </motion.div>
         </div>
       </section>
+
+ <ScrollToTop />
+
+
     </div>
   )
 }

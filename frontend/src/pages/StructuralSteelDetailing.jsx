@@ -14,7 +14,7 @@ import img8 from "../assets/c8.jpg"
 import img9 from "../assets/c9.jpg"
 import img10 from "../assets/c10.jpg"
 
-
+import ScrollToTop from '../components/ScrollToTop';
 
 
 
@@ -473,6 +473,9 @@ const StructuralSteelDetailing = () => {
           </motion.div>
         </div>
       </section>
+
+ <ScrollToTop />
+
     </div>
   )
 }

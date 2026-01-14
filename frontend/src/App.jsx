@@ -21,11 +21,12 @@ import CivilConstructionDesigning from './pages/CivilConstructionDesigning'
 import EstimationAndCosting from './pages/EstimationAndCosting'
 import CivilConstructionServices from './pages/CivilConstructionServices'
 import RenovationWorks from './pages/RenovationWorks'
+import ScrollToTop from './components/ScrollToTop'
 
 
 function App() {
   return (
-    <Router>
+    <Router basename='/glotekensol/'>
       <div className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-grow">
@@ -54,6 +55,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
+          <ScrollToTop />
       </div>
     </Router>
   )

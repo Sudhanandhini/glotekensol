@@ -10,6 +10,7 @@ import img4 from "../assets/a4.jpg"
 import img5 from "../assets/a5.jpg"
 
 
+import ScrollToTop from '../components/ScrollToTop';
 
 
 
@@ -363,6 +364,10 @@ const ConnectionDesign = () => {
           </motion.div>
         </div>
       </section>
+
+ <ScrollToTop />
+
+
     </div>
   )
 }

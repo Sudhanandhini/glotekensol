@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation,  NavLink } from 'react-router-dom'
 import { Menu, X, Facebook, Twitter, Linkedin, Instagram, ArrowRight, MapPin, Mail, Users, ChevronDown } from 'lucide-react'
 
 const Header = () => {
@@ -96,21 +96,27 @@ const Header = () => {
           <div className="flex justify-between items-center py-4">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2">
-              <div className="flex items-center">
+              {/* <div className="flex items-center">
                 <ArrowRight className="text-[#FF6B35] w-10 h-10 rotate-180" strokeWidth={3} />
                 <ArrowRight className="text-[#FF6B35] w-10 h-10 -ml-5" strokeWidth={3} />
-              </div>
-              <span className="text-[#FF6B35] text-4xl font-bold">Emuo</span>
+              </div> */}
+              <span className="text-[#FF6B35] text-4xl font-bold">Glotekensol</span>
             </Link>
 
             {/* Desktop Menu */}
             <div className="hidden lg:flex items-center gap-8">
-              <Link 
-                to="/" 
-                className={`font-medium transition ${isActive('/') ? 'text-[#FF6B35]' : 'text-gray-700 hover:text-[#FF6B35]'}`}
-              >
-                Home
-              </Link>
+            <NavLink
+  to="/"
+  end
+  className={({ isActive }) =>
+    `font-medium transition ${
+      isActive ? 'text-[#FF6B35]' : 'text-gray-700 hover:text-[#FF6B35]'
+    }`
+  }
+>
+  Home
+</NavLink>
+
               <Link 
                 to="/about" 
                 className={`font-medium transition ${isActive('/about') ? 'text-[#FF6B35]' : 'text-gray-700 hover:text-[#FF6B35]'}`}

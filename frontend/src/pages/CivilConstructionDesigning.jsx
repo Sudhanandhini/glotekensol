@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 
-
+import ScrollToTop from '../components/ScrollToTop';
 
 import img1 from "../assets/h1.jpg"
 import img2 from "../assets/h2.jpg"
@@ -528,6 +528,10 @@ const CivilConstructionDesigning = () => {
           </motion.div>
         </div>
       </section>
+
+ <ScrollToTop />
+
+
     </div>
   )
 }

@@ -10,7 +10,7 @@ import img3 from "../assets/b3.jpg"
 import img4 from "../assets/b4.jpg"
 import img5 from "../assets/b5.jpg"
 
-
+import ScrollToTop from '../components/ScrollToTop';
 
 const StructuralSteelDesign = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -391,6 +391,12 @@ const StructuralSteelDesign = () => {
           </motion.div>
         </div>
       </section>
+
+
+ <ScrollToTop />
+
+
+
     </div>
   )
 }

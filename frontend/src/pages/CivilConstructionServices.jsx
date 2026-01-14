@@ -4,6 +4,8 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 
+import ScrollToTop from '../components/ScrollToTop';
+
 import img1 from "../assets/i1.jpg"
 import img2 from "../assets/i2.jpg"
 import img3 from "../assets/i3.webp"
@@ -637,6 +639,12 @@ const CivilConstructionServices = () => {
           </motion.div>
         </div>
       </section>
+
+
+ <ScrollToTop />
+
+
+
     </div>
   )
 }

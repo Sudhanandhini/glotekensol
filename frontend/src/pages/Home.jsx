@@ -4,6 +4,9 @@ import { ArrowRight, CheckCircle, Award, ChevronLeft, ChevronRight, Play } from 
 import { HardHat, Wrench, Box, Blocks, CheckSquare } from 'lucide-react'
 import { motion } from 'framer-motion'
 
+import ScrollToTop from '../components/ScrollToTop';
+
+
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
@@ -510,14 +513,14 @@ const Home = () => {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
+              {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
                 {features.map((feature, index) => (
                   <div key={index} className="flex items-start gap-2">
                     <CheckSquare className="w-5 h-5 flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-white">{feature}</span>
                   </div>
                 ))}
-              </div>
+              </div> */}
 
               <Link
                 to="/about"
@@ -719,6 +722,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+ <ScrollToTop />
+
     </div>
   )
 }

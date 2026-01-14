@@ -9,11 +9,11 @@ const Footer = () => {
           {/* Company Info */}
           <div>
             <Link to="/" className="flex items-center space-x-2 mb-4">
-              <div className="flex items-center">
+              {/* <div className="flex items-center">
                 <ArrowRight className="text-[#FF6B35] w-8 h-8 rotate-180" />
                 <ArrowRight className="text-[#FF6B35] w-8 h-8 -ml-4" />
-              </div>
-              <span className="text-[#FF6B35] text-2xl font-bold">Emuo</span>
+              </div> */}
+              <span className="text-[#FF6B35] text-2xl font-bold">Glotekensol</span>
             </Link>
             <p className="text-gray-400 text-sm mb-4">
               There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.
@@ -62,11 +62,11 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-bold mb-4">Services</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-400 hover:text-[#FF6B35] transition text-sm">Building Construction</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-[#FF6B35] transition text-sm">House Renovation</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-[#FF6B35] transition text-sm">Architecture Design</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-[#FF6B35] transition text-sm">Interior Design</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-[#FF6B35] transition text-sm">Painting Service</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-[#FF6B35] transition text-sm">Design Services</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-[#FF6B35] transition text-sm">Structural Steel Detailing</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-[#FF6B35] transition text-sm">Rebar Detailing</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-[#FF6B35] transition text-sm">Civil Construction</a></li>
+
             </ul>
           </div>
 
@@ -94,7 +94,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-700 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
-            © Emuo 2026 | All Rights Reserved
+            © Glotekensol 2026 | All Rights Reserved
           </p>
           <p className="text-gray-400 text-sm mt-2 md:mt-0">
             Developed by: <span className="text-[#FF6B35]">Sunsys Technologies</span>
