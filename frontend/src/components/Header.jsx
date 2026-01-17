@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useLocation, NavLink } from 'react-router-dom'
 import { Menu, X, Facebook, Twitter, Linkedin, Instagram, MapPin, Mail, Users, ChevronDown } from 'lucide-react'
+import logo from "../assets/header-logo.png"
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -93,11 +94,14 @@ const Header = () => {
       {/* Navigation */}
       <nav className="bg-white shadow-sm border-b sticky top-0 z-50">
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center py-4">
+          <div className="flex justify-between items-center ">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2">
-              <span className="text-[#FF6B35] text-4xl font-bold">Glotekensol</span>
+             
+              <img src={logo} alt="Glotekensol Logo" className="h-auto w-[300px]" />
             </Link>
+
+
 
             {/* Desktop Menu */}
             <div className="hidden lg:flex items-center gap-8">

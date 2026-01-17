@@ -89,7 +89,7 @@ const Contact = () => {
     {
       icon: <Phone className="text-white" size={28} />,
       title: 'Phone',
-      info: ['+1 (234) 567-8900', '+1 (234) 567-8901'],
+      info: ['+91 7892-504-910 ', '+91 9535-331-282'],
       color: 'from-orange-400 to-red-500'
     },
     {
@@ -101,7 +101,12 @@ const Contact = () => {
     {
       icon: <MapPin className="text-white" size={28} />,
       title: 'Address',
-      info: ['123 Construction Street', 'City, State 12345'],
+      info: ['Glotek Ensol Private Limited ', 
+'#67 Achutham, First Floor',  
+'Vidhana Soudha Layout Phase - 1  ',
+'7th Cross 60ft Road  ',
+'Agrahara, Kogilu ', 
+'Bangalore – 64'],
       color: 'from-green-400 to-teal-500'
     },
     {

@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import { Facebook, Twitter, Linkedin, Instagram, ArrowRight, MapPin, Phone, Mail } from 'lucide-react'
 
+import logo from "../assets/footer.png"
+
 const Footer = () => {
   return (
     <footer className="bg-[#001B3D] text-white py-12">
@@ -13,7 +15,7 @@ const Footer = () => {
                 <ArrowRight className="text-[#FF6B35] w-8 h-8 rotate-180" />
                 <ArrowRight className="text-[#FF6B35] w-8 h-8 -ml-4" />
               </div> */}
-              <span className="text-[#FF6B35] text-2xl font-bold">Glotekensol</span>
+             <img src={logo} alt="Glotekensol Logo" className="h-auto w-[300px]" />
             </Link>
             <p className="text-gray-400 text-sm mb-4">
               There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.
@@ -76,11 +78,16 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-start">
                 <MapPin className="text-[#FF6B35] mr-3 mt-1 flex-shrink-0" size={18} />
-                <span className="text-gray-400 text-sm">New Floor New World, 123 Construction St, City</span>
+                <span className="text-gray-400 text-sm">Glotek Ensol Private Limited  
+#67 Achutham, First Floor  
+Vidhana Soudha Layout Phase - 1  
+7th Cross 60ft Road  
+Agrahara, Kogilu  
+Bangalore – 64</span>
               </div>
               <div className="flex items-center">
                 <Phone className="text-[#FF6B35] mr-3 flex-shrink-0" size={18} />
-                <span className="text-gray-400 text-sm">+1 (234) 567-8900</span>
+                <span className="text-gray-400 text-sm">+91 7892-504-910 , +91 9535-331-282</span>
               </div>
               <div className="flex items-center">
                 <Mail className="text-[#FF6B35] mr-3 flex-shrink-0" size={18} />
