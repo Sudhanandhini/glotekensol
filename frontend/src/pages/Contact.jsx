@@ -63,6 +63,9 @@ const Contact = () => {
   })
 
   const [openFAQ, setOpenFAQ] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [responseMessage, setResponseMessage] = useState('')
+  const [responseType, setResponseType] = useState('')
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -72,17 +75,45 @@ const Contact = () => {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('Contact form submitted:', formData)
-    alert('Thank you for your message! We will get back to you soon.')
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: ''
-    })
+    
+    setLoading(true)
+    setResponseMessage('')
+    setResponseType('')
+
+    try {
+      const response = await fetch('http://localhost:5000/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setResponseMessage(data.message || 'Thank you for your message! We will get back to you soon.')
+        setResponseType('success')
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: ''
+        })
+      } else {
+        setResponseMessage(data.message || 'Failed to send message. Please try again.')
+        setResponseType('error')
+      }
+    } catch (error) {
+      console.error('Error:', error)
+      setResponseMessage('An error occurred while sending your message. Please check if the backend server is running.')
+      setResponseType('error')
+    } finally {
+      setLoading(false)
+    }
   }
 
   const contactCards = [
@@ -107,13 +138,13 @@ const Contact = () => {
 '7th Cross 60ft Road  ',
 'Agrahara, Kogilu ', 
 'Bangalore – 64'],
-      color: 'from-green-400 to-teal-500'
+      color: 'from-orange-400 to-red-500'
     },
     {
       icon: <Clock className="text-white" size={28} />,
       title: 'Working Hours',
       info: ['Mon - Fri: 8AM - 6PM', 'Sat: 9AM - 4PM'],
-      color: 'from-purple-400 to-pink-500'
+      color: 'from-blue-400 to-indigo-500'
     }
   ]
 
@@ -233,6 +264,20 @@ const Contact = () => {
                 </p>
               </motion.div>
 
+              {responseMessage && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className={`mb-4 p-4 rounded-lg text-sm font-medium ${
+                    responseType === 'success'
+                      ? 'bg-green-100 text-green-700 border border-green-300'
+                      : 'bg-red-100 text-red-700 border border-red-300'
+                  }`}
+                >
+                  {responseMessage}
+                </motion.div>
+              )}
+
               <form onSubmit={handleSubmit} className="space-y-4">
                 <motion.div 
                   initial={{ opacity: 0, x: -20 }}
@@ -317,9 +362,10 @@ const Contact = () => {
                   whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(255, 107, 53, 0.3)" }}
                   whileTap={{ scale: 0.95 }}
                   type="submit"
-                  className="bg-[#FF6B35] text-white px-8 py-4 rounded-lg hover:bg-[#ff5722] transition-all font-medium flex items-center space-x-2 shadow-lg"
+                  disabled={loading}
+                  className="bg-[#FF6B35] text-white px-8 py-4 rounded-lg hover:bg-[#ff5722] transition-all font-medium flex items-center space-x-2 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <span>Send Message</span>
+                  <span>{loading ? 'SENDING...' : 'Send Message'}</span>
                   <Send size={20} />
                 </motion.button>
               </form>

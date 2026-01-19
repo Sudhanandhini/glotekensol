@@ -63,6 +63,10 @@ const Careers = () => {
     cv: null
   })
 
+  const [loading, setLoading] = useState(false)
+  const [responseMessage, setResponseMessage] = useState('')
+  const [responseType, setResponseType] = useState('')
+
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setFormData(prev => ({
@@ -78,19 +82,59 @@ const Careers = () => {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('Application submitted:', formData)
-    alert('Application submitted successfully! We will contact you soon.')
-    setFormData({
-      name: '',
-      email: '',
-      position: '',
-      lookingFor: '',
-      jobType: '',
-      message: '',
-      cv: null
-    })
+    
+    if (!formData.cv) {
+      setResponseMessage('Please upload your CV')
+      setResponseType('error')
+      return
+    }
+
+    setLoading(true)
+    setResponseMessage('')
+    setResponseType('')
+
+    try {
+      const form = new FormData()
+      form.append('name', formData.name)
+      form.append('email', formData.email)
+      form.append('position', formData.position)
+      form.append('lookingFor', formData.lookingFor)
+      form.append('jobType', formData.jobType)
+      form.append('message', formData.message)
+      form.append('cv', formData.cv)
+
+      const response = await fetch('http://localhost:5000/api/career', {
+        method: 'POST',
+        body: form
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setResponseMessage(data.message || 'Application submitted successfully! We will contact you soon.')
+        setResponseType('success')
+        setFormData({
+          name: '',
+          email: '',
+          position: '',
+          lookingFor: '',
+          jobType: '',
+          message: '',
+          cv: null
+        })
+      } else {
+        setResponseMessage(data.message || 'Failed to submit application. Please try again.')
+        setResponseType('error')
+      }
+    } catch (error) {
+      console.error('Error:', error)
+      setResponseMessage('An error occurred while submitting your application. Please check if the backend server is running.')
+      setResponseType('error')
+    } finally {
+      setLoading(false)
+    }
   }
 
   const jobOpenings = [
@@ -282,6 +326,20 @@ const Careers = () => {
                 >
                   JOIN OUR TEAM
                 </motion.h3>
+
+                {responseMessage && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`mb-4 p-4 rounded-lg text-sm font-medium ${
+                      responseType === 'success'
+                        ? 'bg-green-100 text-green-700 border border-green-300'
+                        : 'bg-red-100 text-red-700 border border-red-300'
+                    }`}
+                  >
+                    {responseMessage}
+                  </motion.div>
+                )}
                 
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <motion.div
@@ -436,9 +494,10 @@ const Careers = () => {
                     whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(0,0,0,0.3)" }}
                     whileTap={{ scale: 0.95 }}
                     type="submit"
-                    className="w-full bg-[#001B3D] text-white px-6 py-4 rounded-lg hover:bg-[#002447] transition-all font-medium text-lg shadow-lg"
+                    disabled={loading}
+                    className="w-full bg-[#001B3D] text-white px-6 py-4 rounded-lg hover:bg-[#002447] transition-all font-medium text-lg shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    SEND APPLICATION
+                    {loading ? 'SUBMITTING...' : 'SEND APPLICATION'}
                   </motion.button>
                 </form>
               </motion.div>
@@ -501,7 +560,7 @@ const Careers = () => {
                 icon: <Shield className="text-white" size={32} />,
                 title: 'Health Insurance',
                 desc: 'Comprehensive health insurance coverage for you and your family.',
-                color: 'from-green-400 to-teal-500'
+                color: 'from-orange-400 to-red-500'
               }
             ].map((benefit, index) => (
               <motion.div 
