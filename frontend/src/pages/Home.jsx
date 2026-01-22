@@ -18,28 +18,39 @@ import {
 import { motion } from 'framer-motion'
 import ScrollToTop from '../components/ScrollToTop'
 
+import steel  from "../assets/steel.jpg"
+import des  from "../assets/des.jpg"
+import bu  from "../assets/build.jpg"
+import rein from "../assets/rein.jpg"
+
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
-  const [currentTestimonial, setCurrentTestimonial] = useState(0)
+  const [currentLogoSet, setCurrentLogoSet] = useState(0)
 
   const heroSlides = [
     {
-      image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1600",
-      title: "We Are Best Builders",
-      subtitle: "Leading Construction",
-      description: "We have been providing top-quality construction services for over two decades. Your trusted partner in building excellence."
+      image: bu,
+      title: "Design Services",
+      subtitle: "We Are Best Builders",
+      description: "Connection Design | Analysis | Structural Modelling"
     },
     {
-      image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1600",
-      title: "Building Your Dreams",
-      subtitle: "Expert Construction",
-      description: "Transforming visions into reality with precision engineering and innovative construction solutions."
+      image: rein,
+      title: "Reinforcement Detailing",
+      subtitle: "Building Your Dreams",
+      description: "3D Modelling | Detailing | Quantity Estimation"
+    },
+     {
+      image: steel,
+      title: "Structural Steel Detailing",
+      subtitle: "Building Your Dreams",
+      description: "Structural 3D Modelling | Detailing | Estimate and Costing |  Structural BIM Services | Structural Point Cloud  Modelling"
     },
     {
-      image: "https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=1600",
-      title: "Quality Craftsmanship",
-      subtitle: "Professional Services",
-      description: "Delivering excellence in every project with attention to detail and commitment to quality."
+      image: des,
+      title: "Civil Construction ",
+      subtitle: "Quality Craftsmanship",
+      description: "Designing | Estimation and Costing | Residential Building Construction | Commercial Building  Construction | Industrial Building Construction"
     }
   ]
 
@@ -66,37 +77,29 @@ const Home = () => {
     }
   ]
 
-  const testimonials = [
-    {
-      name: 'Ravi Kumar',
-      role: 'Project Manager',
-      initial: 'R',
-      text: 'The drawings were accurate and well coordinated. Their team maintained excellent communication throughout the project. Revisions were handled quickly without delays. We were very satisfied with the overall quality.'
-    },
-    {
-      name: 'Anita Sharma',
-      role: 'Structural Engineer',
-      initial: 'A',
-      text: 'High-quality detailing with clear and precise drawings. The models helped resolve coordination issues early. Their technical knowledge is impressive. We would confidently work with them again.'
-    },
-    {
-      name: 'David Wilson',
-      role: 'Construction Contractor',
-      initial: 'D',
-      text: 'Erection drawings were clear and easy to follow on site. Member marking and sequencing were well planned. This reduced installation time significantly. The project was completed smoothly.'
-    },
-    {
-      name: 'Mohammed Ali',
-      role: 'Fabrication Manager',
-      initial: 'M',
-      text: 'Fabrication drawings were extremely detailed and accurate. Material lists were clear and complete. This minimized errors during production. Overall coordination was excellent.'
-    },
-    {
-      name: 'Priya Nair',
-      role: 'Commercial Client',
-      initial: 'P',
-      text: 'Professional service from concept to delivery. The team understood our requirements clearly. Deadlines were met without compromise on quality. We highly recommend their services.'
-    }
+  // Client Logos - Multiple sets of 4
+  const allClientLogos = [
+    // Set 1
+    [
+      { name: 'Client 1', logo: 'https://via.placeholder.com/200x80/001B3D/FFFFFF?text=Client+1' },
+      { name: 'Client 2', logo: 'https://via.placeholder.com/200x80/FF6B35/FFFFFF?text=Client+2' },
+      { name: 'Client 3', logo: 'https://via.placeholder.com/200x80/001B3D/FFFFFF?text=Client+3' },
+      { name: 'Client 4', logo: 'https://via.placeholder.com/200x80/FF6B35/FFFFFF?text=Client+4' }
+    ],
+    // Set 2
+    [
+      { name: 'Client 5', logo: 'https://via.placeholder.com/200x80/001B3D/FFFFFF?text=Client+5' },
+      { name: 'Client 6', logo: 'https://via.placeholder.com/200x80/FF6B35/FFFFFF?text=Client+6' },
+      { name: 'Client 7', logo: 'https://via.placeholder.com/200x80/001B3D/FFFFFF?text=Client+7' },
+      { name: 'Client 8', logo: 'https://via.placeholder.com/200x80/FF6B35/FFFFFF?text=Client+8' }
+    ],
+    // Set 3
+    [
+      { name: 'Client 9', logo: 'https://via.placeholder.com/200x80/001B3D/FFFFFF?text=Client+9' },
+      { name: 'Client 10', logo: 'https://via.placeholder.com/200x80/FF6B35/FFFFFF?text=Client+10' },
+      { name: 'Client 11', logo: 'https://via.placeholder.com/200x80/001B3D/FFFFFF?text=Client+11' },
+      { name: 'Client 12', logo: 'https://via.placeholder.com/200x80/FF6B35/FFFFFF?text=Client+12' }
+    ]
   ]
 
   // Counter Animation Hook
@@ -131,15 +134,14 @@ const Home = () => {
     return count
   }
 
-  // Stats with counter
+  // Stats with counter - 3 sections only
   const StatsCounter = () => {
     const [startCounting, setStartCounting] = useState(false)
     const sectionRef = useRef(null)
 
-    const count1 = useCounter(500, 2000, startCounting)
-    const count2 = useCounter(2, 2000, startCounting)
-    const count3 = useCounter(350, 2000, startCounting)
-    const count4 = useCounter(50, 2000, startCounting)
+    const count1 = useCounter(300, 2000, startCounting)
+    const count2 = useCounter(80, 2000, startCounting)
+    const count3 = useCounter(50, 2000, startCounting)
 
     useEffect(() => {
       const observer = new IntersectionObserver(
@@ -164,15 +166,14 @@ const Home = () => {
 
     const stats = [
       { number: count1, suffix: '+', label: 'Projects Completed' },
-      { number: count2, suffix: '+', label: 'Years Experience' },
-      { number: count3, suffix: '+', label: 'Happy Clients' },
-      { number: count4, suffix: '+', label: 'Expert Team' }
+      { number: count2, suffix: '+', label: 'Happy Clients' },
+      { number: count3, suffix: '+', label: 'Expert Team' }
     ]
 
     return (
       <section ref={sectionRef} className="py-16 bg-[#001B3D] text-white">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
@@ -202,13 +203,13 @@ const Home = () => {
     return () => clearInterval(timer)
   }, [heroSlides.length])
 
-  // Auto-play testimonials slider
+  // Auto-play logo slider - slides every 3 seconds
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
-    }, 5000)
+      setCurrentLogoSet((prev) => (prev + 1) % allClientLogos.length)
+    }, 3000)
     return () => clearInterval(timer)
-  }, [testimonials.length])
+  }, [allClientLogos.length])
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
@@ -218,12 +219,12 @@ const Home = () => {
     setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)
   }
 
-  const nextTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
+  const nextLogoSet = () => {
+    setCurrentLogoSet((prev) => (prev + 1) % allClientLogos.length)
   }
 
-  const prevTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+  const prevLogoSet = () => {
+    setCurrentLogoSet((prev) => (prev - 1 + allClientLogos.length) % allClientLogos.length)
   }
 
   return (
@@ -286,12 +287,12 @@ const Home = () => {
                   >
                     Get Started
                   </Link>
-                  <button className="bg-white text-[#001B3D] px-8 py-3 rounded hover:bg-gray-100 transition-all duration-300 font-medium flex items-center hover:shadow-lg transform hover:-translate-y-1">
+                  {/* <button className="bg-white text-[#001B3D] px-8 py-3 rounded hover:bg-gray-100 transition-all duration-300 font-medium flex items-center hover:shadow-lg transform hover:-translate-y-1">
                     <div className="w-10 h-10 bg-[#FF6B35] rounded-full flex items-center justify-center mr-3 hover:scale-110 transition-transform">
                       <Play size={16} className="ml-1" />
                     </div>
                     How We Work
-                  </button>
+                  </button> */}
                 </motion.div>
               </motion.div>
             </div>
@@ -360,14 +361,14 @@ const Home = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 className={`group relative overflow-hidden rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 ${
-                  index === 3 ? 'bg-[#001B3D] hover:bg-[#FF6B35]' : 'bg-white hover:bg-[#001B3D]'
+                  index === 3 ? 'bg-white hover:bg-[#001B3D]' : 'bg-white hover:bg-[#001B3D]'
                 }`}
               >
                 <div className="p-8">
                   {/* Icon */}
                   <div
                     className={`mb-6 transition-all duration-300 transform group-hover:scale-110 ${
-                      index === 3 ? 'text-white group-hover:text-[#FF6B35]' : 'text-[#FF6B35] group-hover:text-white'
+                      index === 3 ? 'text-[#FF6B35] group-hover:text-white' : 'text-[#FF6B35] group-hover:text-white'
                     }`}
                   >
                     {service.icon}
@@ -376,7 +377,7 @@ const Home = () => {
                   {/* Title */}
                   <h3
                     className={`text-xl font-bold mb-4 transition-colors duration-300 ${
-                      index === 3 ? 'text-white group-hover:text-[#001B3D]' : 'text-[#FF6B35] group-hover:text-white'
+                      index === 3 ? 'text-[#FF6B35] group-hover:text-white' : 'text-[#FF6B35] group-hover:text-white'
                     }`}
                   >
                     {service.title}
@@ -385,7 +386,7 @@ const Home = () => {
                   {/* Description */}
                   <p
                     className={`text-sm mb-6 transition-colors duration-300 ${
-                      index === 3 ? 'text-white group-hover:text-gray-700' : 'text-gray-700 group-hover:text-white'
+                      index === 3 ? 'text-gray-700 group-hover:text-white' : 'text-gray-700 group-hover:text-white'
                     }`}
                   >
                     {service.description}
@@ -425,16 +426,6 @@ const Home = () => {
                 alt="Blueprint"
                 className="rounded-lg shadow-xl"
               />
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                viewport={{ once: true }}
-                className="absolute -bottom-6 -right-6 bg-[#FF6B35] text-white p-6 rounded-lg shadow-lg"
-              >
-                <div className="text-4xl font-bold">2+</div>
-                <div className="text-sm">Years Experience</div>
-              </motion.div>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 50 }}
@@ -489,7 +480,7 @@ const Home = () => {
               <p className="text-sm uppercase tracking-wider mb-4 font-semibold">Who We Are</p>
               
               <h2 className="text-4xl lg:text-5xl font-bold text-[#001B3D] mb-6 leading-tight">
-                2+ Years Of Professional Industry Experience.
+           Professional Industry Experience.
               </h2>
               
               <div className="space-y-4 mb-8">
@@ -544,14 +535,11 @@ const Home = () => {
                 </p>
               </div>
             </div>
-
-            {/* Decorative Circle */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border-4 border-white/20 rounded-full"></div>
           </div>
         </div>
       </section>
 
-      {/* Stats Section with Counter */}
+      {/* Stats Section with Counter - 3 Sections Only */}
       <StatsCounter />
 
       {/* Services Preview - Redesigned */}
@@ -747,7 +735,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Testimonials Slider */}
+      {/* Client Logo Slider - 4 Logos Displayed at Once */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <motion.div
@@ -757,40 +745,37 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <p className="text-[#FF6B35] mb-2 text-sm uppercase tracking-wide font-semibold">TESTIMONIALS</p>
-            <h2 className="text-4xl font-bold text-[#001B3D]">What Our Clients Say</h2>
+            <p className="text-[#FF6B35] mb-2 text-sm uppercase tracking-wide font-semibold">OUR CLIENTS</p>
+            <h2 className="text-4xl font-bold text-[#001B3D]">Trusted By Leading Companies</h2>
           </motion.div>
 
-          <div className="relative max-w-5xl mx-auto">
-            {/* Testimonial Cards */}
-            <div className="relative overflow-hidden">
+          <div className="relative max-w-6xl mx-auto">
+            {/* Logo Slider - Shows 4 at a time */}
+            <div className="relative overflow-hidden py-8">
               <div 
-                className="flex transition-transform duration-500 ease-in-out"
-                style={{ transform: `translateX(-${currentTestimonial * 100}%)` }}
+                className="flex transition-transform duration-700 ease-in-out"
+                style={{ transform: `translateX(-${currentLogoSet * 100}%)` }}
               >
-                {testimonials.map((testimonial, index) => (
+                {allClientLogos.map((logoSet, setIndex) => (
                   <div
-                    key={index}
-                    className="w-full flex-shrink-0 px-4"
+                    key={setIndex}
+                    className="w-full flex-shrink-0 grid grid-cols-2 md:grid-cols-4 gap-8 px-4"
                   >
-                    <motion.div
-                      initial={{ opacity: 0, y: 50 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="bg-white p-8 md:p-12 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300"
-                    >
-                      <div className="flex items-center mb-6">
-                        <div className="w-16 h-16 bg-[#FF6B35] rounded-full flex items-center justify-center text-white font-bold text-2xl flex-shrink-0">
-                          {testimonial.initial}
-                        </div>
-                        <div className="ml-6">
-                          <h4 className="font-bold text-[#001B3D] text-xl">{testimonial.name}</h4>
-                          <p className="text-gray-600">{testimonial.role}</p>
-                        </div>
-                      </div>
-                      <p className="text-gray-700 text-lg leading-relaxed">
-                        &ldquo;{testimonial.text}&rdquo;
-                      </p>
-                    </motion.div>
+                    {logoSet.map((client, logoIndex) => (
+                      <motion.div
+                        key={logoIndex}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: logoIndex * 0.1 }}
+                        className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
+                      >
+                        <img 
+                          src={client.logo} 
+                          alt={client.name}
+                          className="max-w-full max-h-20 object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                        />
+                      </motion.div>
+                    ))}
                   </div>
                 ))}
               </div>
@@ -798,13 +783,13 @@ const Home = () => {
 
             {/* Navigation Arrows */}
             <button
-              onClick={prevTestimonial}
+              onClick={prevLogoSet}
               className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white hover:bg-[#FF6B35] text-[#001B3D] hover:text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-10"
             >
               <ChevronLeft size={24} />
             </button>
             <button
-              onClick={nextTestimonial}
+              onClick={nextLogoSet}
               className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white hover:bg-[#FF6B35] text-[#001B3D] hover:text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-10"
             >
               <ChevronRight size={24} />
@@ -812,12 +797,12 @@ const Home = () => {
 
             {/* Dots Indicator */}
             <div className="flex justify-center gap-3 mt-8">
-              {testimonials.map((_, index) => (
+              {allClientLogos.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentTestimonial(index)}
+                  onClick={() => setCurrentLogoSet(index)}
                   className={`transition-all duration-300 rounded-full ${
-                    index === currentTestimonial
+                    index === currentLogoSet
                       ? 'w-12 h-3 bg-[#FF6B35]'
                       : 'w-3 h-3 bg-gray-300 hover:bg-gray-400'
                   }`}

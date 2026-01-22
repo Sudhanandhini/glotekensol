@@ -417,7 +417,7 @@ const Careers = () => {
                     />
                   </motion.div>
 
-                  <motion.div
+                  {/* <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
@@ -436,7 +436,7 @@ const Careers = () => {
                       <option value="part-time">Part Time</option>
                       <option value="contract">Contract</option>
                     </motion.select>
-                  </motion.div>
+                  </motion.div> */}
 
                   <motion.div
                     initial={{ opacity: 0, x: -20 }}

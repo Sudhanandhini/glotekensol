@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { Link, useLocation, NavLink } from 'react-router-dom'
-import { Menu, X, Facebook, Twitter, Linkedin, Instagram, MapPin, Mail, Users, ChevronDown } from 'lucide-react'
+import { Menu, X, Facebook, Twitter, Linkedin, Instagram, MapPin, Mail, Users, ChevronDown, ChevronRight } from 'lucide-react'
 import logo from "../assets/header-logo.png"
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState(null)
+  const [activeCategory, setActiveCategory] = useState(0)
   const location = useLocation()
 
   const isActive = (path) => location.pathname === path
@@ -24,15 +25,15 @@ const Header = () => {
         { name: 'Structural Steel Detailing', path: '/structural-steel-detailing' },
         { name: 'Steel BIM Services', path: '/steel-bim-services' },
         { name: 'Steel 3D Modelling', path: '/steel-3d-modelling' },
-        { name: 'Point Cloud 3D Modelling', path: '/point-cloud-3d-modelling' },
-        { name: 'Estimate and Costing', path: '/estimate-and-costing' }
+        { name: 'Point Cloud 3D Modelling', path: '/steel-point-cloud' },
+        { name: 'Estimate and Costing', path: '/estimate-costing' }
       ]
     },
     {
       category: 'Rebar Detailing',
       items: [
         { name: 'Rebar Detailing', path: '/rebar-detailing' },
-        { name: 'Rebar Quantity Estimation', path: '/rebar-quantity-estimation' },
+        { name: 'Rebar Quantity Estimation', path: '/rebar-estimation' },
         { name: 'Rebar 3D Modelling', path: '/rebar-3d-modelling' }
       ]
     },
@@ -40,9 +41,9 @@ const Header = () => {
       category: 'Civil Construction',
       items: [
         { name: 'Civil Construction Design', path: '/civil-construction-design' },
-        { name: 'Civil Estimation & Costing', path: '/civil-estimation-costing' },
-        { name: 'Civil Construction Services', path: '/civil-construction-services' },
-        { name: 'Civil Renovation Works', path: '/civil-renovation-works' }
+        { name: 'Civil Estimation & Costing', path: '/civil-estimation' },
+        { name: 'Civil Construction Services', path: '/civil-services' },
+        { name: 'Civil Renovation Works', path: '/civil-renovation' }
       ]
     }
   ]
@@ -60,7 +61,9 @@ const Header = () => {
             <div className="container mx-auto flex flex-wrap items-center text-sm gap-6 pr-12">
               <span className="flex items-center gap-2">
                 <MapPin size={16} />
-                <span>25/B Milford Road, New York</span>
+                <span>7th Cross 60ft Road, 
+Agrahara, Kogilu, 
+Bangalore – 64</span>
               </span>
               <span className="flex items-center gap-2">
                 <Mail size={16} />
@@ -68,22 +71,13 @@ const Header = () => {
               </span>
               <span className="flex items-center gap-2">
                 <Users size={16} />
-                <span>Sun - Fri (08AM - 10PM)</span>
+                <span>+91 7892-504-910 , +91 9535-331-282</span>
               </span>
             </div>
           </div>
           
           {/* Dark Blue Section with Social Icons */}
           <div className="bg-[#001B3D] text-white py-3 px-8 flex items-center gap-3">
-            <div className="border border-white/30 p-2 rounded cursor-pointer hover:bg-white/10 transition">
-              <Instagram size={16} />
-            </div>
-            <div className="border border-white/30 p-2 rounded cursor-pointer hover:bg-white/10 transition">
-              <Facebook size={16} />
-            </div>
-            <div className="border border-white/30 p-2 rounded cursor-pointer hover:bg-white/10 transition">
-              <Twitter size={16} />
-            </div>
             <div className="border border-white/30 p-2 rounded cursor-pointer hover:bg-white/10 transition">
               <Linkedin size={16} />
             </div>
@@ -97,11 +91,8 @@ const Header = () => {
           <div className="flex justify-between items-center ">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2">
-             
               <img src={logo} alt="Glotekensol Logo" className="h-auto w-[300px]" />
             </Link>
-
-
 
             {/* Desktop Menu */}
             <div className="hidden lg:flex items-center gap-8">
@@ -124,11 +115,17 @@ const Header = () => {
                 About
               </Link>
               
-              {/* Services Mega Menu with Clickable Link */}
+              {/* Services Mega Menu - Two Panel Design */}
               <div 
                 className="relative"
-                onMouseEnter={() => setActiveDropdown('services')}
-                onMouseLeave={() => setActiveDropdown(null)}
+                onMouseEnter={() => {
+                  setActiveDropdown('services')
+                  setActiveCategory(0)
+                }}
+                onMouseLeave={() => {
+                  setActiveDropdown(null)
+                  setActiveCategory(0)
+                }}
               >
                 <div className="flex items-center gap-1">
                   <Link 
@@ -149,30 +146,51 @@ const Header = () => {
                   </button>
                 </div>
                 
-                {/* Mega Menu Dropdown */}
+                {/* Two Panel Mega Menu */}
                 {activeDropdown === 'services' && (
                   <div className="absolute left-0 top-full pt-2 z-50">
-                    <div className="bg-white shadow-2xl rounded-lg overflow-hidden min-w-[800px] border border-gray-200">
-                      <div className="grid grid-cols-2 gap-0">
+                    <div className="bg-white shadow-2xl rounded-lg overflow-hidden border border-gray-200 flex">
+                      {/* Left Panel - Categories */}
+                      <div className="w-64">
                         {servicesMenu.map((section, idx) => (
-                          <div key={section.category}>
-                            <div className={`${idx % 2 === 0 ? 'bg-[#FF6B35]' : 'bg-[#001B3D]'} text-white px-6 py-3 font-bold text-sm`}>
-                              {section.category}
-                            </div>
-                            <div className="bg-white">
-                              {section.items.map((item) => (
-                                <Link
-                                  key={item.path}
-                                  to={item.path}
-                                  className="block px-6 py-3 text-gray-700 hover:bg-[#FF6B35] hover:text-white transition-colors duration-200 border-b border-gray-100 last:border-0"
-                                  onClick={() => setActiveDropdown(null)}
-                                >
-                                  {item.name}
-                                </Link>
-                              ))}
-                            </div>
+                          <div
+                            key={section.category}
+                            className={`
+                              px-6 py-4 font-semibold text-sm cursor-pointer transition-all flex items-center justify-between
+                              ${activeCategory === idx 
+                                ? 'bg-[#FF6B35] text-white' 
+                                : idx % 2 === 0 
+                                  ? 'bg-[#FF6B35] text-white hover:bg-[#001B3D]' 
+                                  : 'bg-[#FF6B35] text-white hover:bg-[#001B3D]'
+                              }
+                            `}
+                            onMouseEnter={() => setActiveCategory(idx)}
+                          >
+                            <span>{section.category}</span>
+                            <ChevronRight size={16} />
                           </div>
                         ))}
+                      </div>
+
+                      {/* Right Panel - Items */}
+                      <div className="w-80 bg-[#001B3D]">
+                        <div className="p-4">
+                          <h3 className="text-white font-bold text-base mb-3 pb-2 border-b border-white/20">
+                            {servicesMenu[activeCategory].category}
+                          </h3>
+                          <div className="space-y-1">
+                            {servicesMenu[activeCategory].items.map((item) => (
+                              <Link
+                                key={item.path}
+                                to={item.path}
+                                className="block px-4 py-3 text-white hover:bg-[#FF6B35] transition-colors duration-200 rounded text-sm"
+                                onClick={() => setActiveDropdown(null)}
+                              >
+                                {item.name}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -232,7 +250,7 @@ const Header = () => {
                 About
               </Link>
               
-              {/* Mobile Services with Clickable Link */}
+              {/* Mobile Services */}
               <div>
                 <div className="flex items-center justify-between">
                   <Link 

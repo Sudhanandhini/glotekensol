@@ -211,7 +211,7 @@ Thank you for considering our services. We look forward to working with you and 
                 className="absolute -bottom-6 -left-6 bg-[#FF6B35] text-white p-8 rounded-lg shadow-lg"
               >
                 <div className="text-5xl font-bold mb-1">
-                  <AnimatedCounter end={500} suffix="+" />
+                  <AnimatedCounter end={300} suffix="+" />
                 </div>
                 <div className="text-sm">Completed Projects</div>
               </motion.div>
@@ -474,12 +474,12 @@ Thank you for considering our services. We look forward to working with you and 
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white"
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-white"
           >
             {[
-              { end: 500, suffix: '+', label: 'Projects Completed' },
-              { end: 25, suffix: '+', label: 'Years Experience' },
-              { end: 350, suffix: '+', label: 'Happy Clients' },
+              { end: 300, suffix: '+', label: 'Projects Completed' },
+            
+              { end: 80, suffix: '+', label: 'Happy Clients' },
               { end: 50, suffix: '+', label: 'Expert Team' }
             ].map((stat, index) => (
               <motion.div 

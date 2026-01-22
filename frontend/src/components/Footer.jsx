@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import { Facebook, Twitter, Linkedin, Instagram, ArrowRight, MapPin, Phone, Mail } from 'lucide-react'
+import { Linkedin, ArrowRight, MapPin, Phone, Mail } from 'lucide-react'
 
-import logo from "../assets/footer.png"
+import logo from "../assets/footer-logo.png"
 
 const Footer = () => {
   return (
@@ -21,10 +21,7 @@ const Footer = () => {
               There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.
             </p>
             <div className="flex space-x-4">
-              <Facebook className="text-gray-400 hover:text-[#FF6B35] cursor-pointer transition" size={20} />
-              <Twitter className="text-gray-400 hover:text-[#FF6B35] cursor-pointer transition" size={20} />
               <Linkedin className="text-gray-400 hover:text-[#FF6B35] cursor-pointer transition" size={20} />
-              <Instagram className="text-gray-400 hover:text-[#FF6B35] cursor-pointer transition" size={20} />
             </div>
           </div>
 
@@ -79,10 +76,10 @@ const Footer = () => {
               <div className="flex items-start">
                 <MapPin className="text-[#FF6B35] mr-3 mt-1 flex-shrink-0" size={18} />
                 <span className="text-gray-400 text-sm">Glotek Ensol Private Limited  
-#67 Achutham, First Floor  
-Vidhana Soudha Layout Phase - 1  
-7th Cross 60ft Road  
-Agrahara, Kogilu  
+#67 Achutham, First Floor , 
+Vidhana Soudha Layout Phase - 1,  
+7th Cross 60ft Road, 
+Agrahara, Kogilu, 
 Bangalore – 64</span>
               </div>
               <div className="flex items-center">
@@ -91,7 +88,7 @@ Bangalore – 64</span>
               </div>
               <div className="flex items-center">
                 <Mail className="text-[#FF6B35] mr-3 flex-shrink-0" size={18} />
-                <span className="text-gray-400 text-sm">info@example.com</span>
+                <span className="text-gray-400 text-sm">info@glotekensol.com</span>
               </div>
             </div>
             

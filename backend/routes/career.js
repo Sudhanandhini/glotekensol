@@ -27,7 +27,7 @@ const validateCareer = [
   body('email').isEmail().withMessage('Valid email is required'),
   body('position').trim().notEmpty().withMessage('Current position is required'),
   body('lookingFor').optional().trim(),
-  body('jobType').optional().trim(),
+ 
   body('message').optional().trim()
 ];
 
@@ -57,7 +57,7 @@ router.post('/', upload.single('cv'), validateCareer, asyncHandler(async (req, r
       <p><strong>Email:</strong> ${email}</p>
       <p><strong>Current Position:</strong> ${position}</p>
       <p><strong>Position Looking For:</strong> ${lookingFor || 'Not specified'}</p>
-      <p><strong>Job Type Preference:</strong> ${jobType || 'Not specified'}</p>
+     
       <p><strong>Additional Message:</strong> ${message || 'None'}</p>
       <p><strong>CV File:</strong> ${req.file.originalname}</p>
       <hr>
@@ -86,7 +86,7 @@ router.post('/', upload.single('cv'), validateCareer, asyncHandler(async (req, r
       <ul>
         <li><strong>Current Position:</strong> ${position}</li>
         <li><strong>Position Applied For:</strong> ${lookingFor || 'General'}</li>
-        <li><strong>Preferred Job Type:</strong> ${jobType || 'Not specified'}</li>
+      
       </ul>
       <hr>
       <p>Best regards,<br>Glotek Ensol HR Team</p>

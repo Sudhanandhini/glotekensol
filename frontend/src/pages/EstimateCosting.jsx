@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { X } from 'lucide-react'
-import { motion } from 'framer-motion'
 
 import ScrollToTop from '../components/ScrollToTop';
+
 
 import img1 from "../assets/fourth/1.jpg"
 import img2 from "../assets/fourth/2.jpg"
@@ -30,18 +30,31 @@ import img28 from "../assets/fourth/28.jpg"
 import img29 from "../assets/fourth/29.jpg"
 
 
-import img31 from "../assets/fourth/31.png"
-import img32 from "../assets/fourth/32.png"
-import img33 from "../assets/fourth/33.png"
-import img34 from "../assets/fourth/34.png"
-import img35 from "../assets/fourth/35.png"
-import img36 from "../assets/fourth/36.png"
 import img37 from "../assets/fourth/37.png"
 import img38 from "../assets/fourth/38.png"
 import img39 from "../assets/fourth/39.png"
 import img40 from "../assets/fourth/40.png"
 import img41 from "../assets/fourth/41.png"
 
+
+import img56 from "../assets/fourth/56.jpg"
+import img57 from "../assets/fourth/57.jpg"
+import img58 from "../assets/fourth/58.jpg"
+import img59 from "../assets/fourth/59.jpg"
+import img60 from "../assets/fourth/60.jpg"
+
+
+import img51 from "../assets/fourth/51.jpg"
+import img52 from "../assets/fourth/36.jpg"
+import img53 from "../assets/fourth/34.png"
+import img54 from "../assets/fourth/30.png"
+import img55 from "../assets/fourth/25.jpg"
+import img61 from "../assets/fourth/20.png"
+
+import img63 from "../assets/fourth/last/60.jpg"
+import img64 from "../assets/fourth/last/46.jpg"
+import img65 from "../assets/fourth/last/6.jpg"
+import img66 from "../assets/fourth/last/68.jpg"
 
 
 
@@ -52,51 +65,49 @@ const EstimateCosting = () => {
   const [selectedImage, setSelectedImage] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState('All')
 
-  const categories = ['All', '3D Modelling', 'Assembly Drawings', 'Single Part Drawings', 'Erection Drawings']
+  const categories = ['All', '3D Model Snaps', 'Assembly Drawings', 'Single Part Drawings', 'Erection Drawings']
 
   const projects = [
-    {
-  id: 41,
-  title: 'Industrial steel structure model',
+ 
+
+
+
+{
+  id: 56,
+  title: 'Communication tower steel model',
   category: '3D Modelling',
-  img: img31,
-  desc: 'Three-dimensional model of an industrial steel structure showing primary framing, secondary members, and connection geometry.'
+  img: img56,
+  desc: 'High-rise steel communication tower model showcasing circular platforms, braced shafts, and integrated access structures designed for stability and equipment installation.'
 },
 {
-  id: 42,
-  title: 'Warehouse roof framing model',
+  id: 57,
+  title: 'Tower base structural detailing',
   category: '3D Modelling',
-  img: img32,
-  desc: '3D model of warehouse roof framing including purlins, rafters, and column layout for coordination and analysis.'
+  img: img57,
+  desc: 'Close-up 3D model of the tower base highlighting foundation interface, support framing, and platform connection geometry for fabrication and assembly.'
 },
 {
-  id: 43,
-  title: 'Canopy steel framework',
+  id: 58,
+  title: 'Observation tower structural model',
   category: '3D Modelling',
-  img: img33,
-  desc: 'Three-dimensional steel canopy model illustrating curved members, support columns, and connection points.'
+  img: img58,
+  desc: 'Three-dimensional model of an observation tower structure with multi-level decks, vertical bracing, and reinforced core for enhanced load-bearing performance.'
 },
 {
-  id: 44,
-  title: 'Pipe rack steel model',
+  id: 59,
+  title: 'Pedestrian bridge steel framing',
   category: '3D Modelling',
-  img: img34,
-  desc: '3D model of a pipe rack structure showing beam framing, column supports, and equipment clearances.'
+  img: img59,
+  desc: '3D model of a pedestrian steel bridge featuring longitudinal girders, transverse trusses, and column supports designed for walkway circulation and load distribution.'
 },
 {
-  id: 45,
-  title: 'Commercial building steel model',
+  id: 60,
+  title: 'Covered walkway truss system',
   category: '3D Modelling',
-  img: img35,
-  desc: 'Detailed steel model of a commercial building including floor framing, vertical bracing, and core structures.'
+  img: img60,
+  desc: 'Steel truss walkway model illustrating roof framing, side bracings, and column arrangement for sheltered pedestrian movement and structural rigidity.'
 },
-{
-  id: 46,
-  title: 'Platform and access structure',
-  category: '3D Modelling',
-  img: img36,
-  desc: '3D model of steel platforms and access structures showing stairs, handrails, and support framing.'
-},
+
 {
   id: 47,
   title: 'Multi-level steel structure',
@@ -132,6 +143,83 @@ const EstimateCosting = () => {
   img: img41,
   desc: 'Detailed 3D model of a complex steel framing system developed for coordination, clash detection, and fabrication.'
 },
+
+{
+  id: 51,
+  title: 'Long-span access platform model',
+  category: '3D Modelling',
+  img: img51,
+  desc: 'Three-dimensional structural model of an extended access platform featuring modular walkway framing, braced supports, and handrail integration for industrial circulation.'
+},
+{
+  id: 52,
+  title: 'Process building steel framework',
+  category: '3D Modelling',
+  img: img52,
+  desc: 'Detailed steel structure model of an industrial process building showing multi-level framing, equipment support beams, and vertical bracing for load transfer.'
+},
+{
+  id: 53,
+  title: 'Elevated conveyor gallery model',
+  category: '3D Modelling',
+  img: img53,
+  desc: '3D model of an elevated conveyor gallery with enclosed walkway, truss support system, and foundation interface for material handling infrastructure.'
+},
+{
+  id: 54,
+  title: 'Equipment support structure',
+  category: '3D Modelling',
+  img: img54,
+  desc: 'Compact steel platform model designed for equipment mounting, featuring deck grating support beams, access ladders, and safety railing details.'
+},
+{
+  id: 55,
+  title: 'Modular pipe rack framing',
+  category: '3D Modelling',
+  img: img55,
+  desc: 'Three-dimensional steel model of a modular pipe rack including transverse bents, longitudinal girders, and bracing members designed for utility routing.'
+},
+{
+  id: 61,
+  title: 'Structural walkway system',
+  category: '3D Modelling',
+  img: img61,
+  desc: '3D steel walkway system featuring truss reinforcement, support columns, and platform connections for safe access across industrial facilities.'
+},
+{
+  id: 63,
+  title: 'Staircase connection detailing',
+  category: '3D Modelling',
+  img: img63,
+  desc: 'High-detail 3D model of a steel staircase assembly showing tread plates, support brackets, and connection geometry for fabrication and site installation.'
+},
+{
+  id: 64,
+  title: 'Walkway support framing model',
+  category: '3D Modelling',
+  img: img64,
+  desc: 'Three-dimensional walkway model featuring braced support columns, deck grating layout, and beam arrangements designed for safe industrial access.'
+},
+{
+  id: 65,
+  title: 'Multi-level stair and landing structure',
+  category: '3D Modelling',
+  img: img65,
+  desc: 'Steel model of a multi-level stair system including intermediate landings, structural stringers, and railing integration for functional vertical circulation.'
+},
+{
+  id: 66,
+  title: 'Structural platform assembly',
+  category: '3D Modelling',
+  img: img66,
+  desc: '3D model of an industrial platform showing vertical bracing, deck framing, and equipment support areas engineered for stability and operational requirements.'
+},
+
+
+
+
+
+
 
     {
   id: 12,
@@ -286,35 +374,17 @@ const EstimateCosting = () => {
 
   return (
     <div>
-      
-       {/* Hero Section */}
-      <section
-        className="relative h-[400px] bg-cover bg-center"
-        style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1600')`
-        }}
-      >
-        <div className="container mx-auto px-4 h-full flex items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-white"
-          >
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 uppercase tracking-wider">
-              Our Recent Projects
-            </h1>
-          </motion.div>
-        </div>
-        
-        {/* Decorative Wave */}
-        <div className="absolute bottom-0 left-0 w-full">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" className="w-full">
-            <path fill="#ffffff" d="M0,64L48,69.3C96,75,192,85,288,80C384,75,480,53,576,48C672,43,768,53,864,58.7C960,64,1056,64,1152,58.7C1248,53,1344,43,1392,37.3L1440,32L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"></path>
-          </svg>
+      {/* Page Header */}
+      <section className="relative h-[300px] bg-cover bg-center" style={{
+        backgroundImage: "linear-gradient(rgba(0, 27, 61, 0.8), rgba(0, 27, 61, 0.8)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1600')"
+      }}>
+        <div className="container mx-auto px-4 h-full flex items-center justify-center">
+          <div className="text-center text-white">
+            <h1 className="text-5xl font-bold mb-4">Estimate Costing</h1>
+            <p className="text-xl">Showcasing Our Best Work</p>
+          </div>
         </div>
       </section>
-
 
       {/* Gallery Section */}
       <section className="py-20 bg-white">
@@ -415,7 +485,9 @@ const EstimateCosting = () => {
         </div>
       </section>
 
+
  <ScrollToTop />
+
 
     </div>
   )

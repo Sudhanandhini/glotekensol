@@ -143,7 +143,7 @@ const Contact = () => {
     {
       icon: <Clock className="text-white" size={28} />,
       title: 'Working Hours',
-      info: ['Mon - Fri: 8AM - 6PM', 'Sat: 9AM - 4PM'],
+      info: ['Mon - Fri: 9AM - 6:30PM', 'Sat - Sun: Half Day'],
       color: 'from-blue-400 to-indigo-500'
     }
   ]
