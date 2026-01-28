@@ -22,6 +22,8 @@ import steel  from "../assets/steel.jpg"
 import des  from "../assets/des.jpg"
 import bu  from "../assets/build.jpg"
 import rein from "../assets/rein.jpg"
+import img1 from "../assets/rein.jpg"
+
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -135,66 +137,67 @@ const Home = () => {
   }
 
   // Stats with counter - 3 sections only
-  const StatsCounter = () => {
-    const [startCounting, setStartCounting] = useState(false)
-    const sectionRef = useRef(null)
+const StatsCounter = () => {
+  const [startCounting, setStartCounting] = useState(false)
+  const [hasCountedOnce, setHasCountedOnce] = useState(false)
+  const sectionRef = useRef(null)
 
-    const count1 = useCounter(300, 2000, startCounting)
-    const count2 = useCounter(80, 2000, startCounting)
-    const count3 = useCounter(50, 2000, startCounting)
+  const count1 = useCounter(300, 2000, startCounting)
+  const count2 = useCounter(80, 2000, startCounting)
+  const count3 = useCounter(50, 2000, startCounting)
 
-    useEffect(() => {
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setStartCounting(true)
-          }
-        },
-        { threshold: 0.3 }
-      )
-
-      if (sectionRef.current) {
-        observer.observe(sectionRef.current)
-      }
-
-      return () => {
-        if (sectionRef.current) {
-          observer.unobserve(sectionRef.current)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasCountedOnce) {
+          setStartCounting(true)
+          setHasCountedOnce(true)
         }
-      }
-    }, [])
-
-    const stats = [
-      { number: count1, suffix: '+', label: 'Projects Completed' },
-      { number: count2, suffix: '+', label: 'Happy Clients' },
-      { number: count3, suffix: '+', label: 'Expert Team' }
-    ]
-
-    return (
-      <section ref={sectionRef} className="py-16 bg-[#001B3D] text-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.5 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="text-center group"
-              >
-                <div className="text-5xl md:text-6xl font-bold text-[#FF6B35] mb-2 group-hover:scale-110 transition-transform duration-300">
-                  {stat.number}{stat.suffix}
-                </div>
-                <div className="text-gray-300 text-lg">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      },
+      { threshold: 0.3 }
     )
-  }
 
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current)
+      }
+    }
+  }, [hasCountedOnce])
+
+  const stats = [
+    { number: count1, suffix: '+', label: 'Projects Completed' },
+    { number: count2, suffix: '+', label: 'Happy Clients' },
+    { number: count3, suffix: '+', label: 'Expert Team' }
+  ]
+
+  return (
+    <section ref={sectionRef} className="py-16 bg-[#001B3D] text-white">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {stats.map((stat, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="text-center group"
+            >
+              <div className="text-5xl md:text-6xl font-bold text-[#FF6B35] mb-2 group-hover:scale-110 transition-transform duration-300">
+                {stat.number}{stat.suffix}
+              </div>
+              <div className="text-gray-300 text-lg">{stat.label}</div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
   // Auto-play hero slider
   useEffect(() => {
     const timer = setInterval(() => {
@@ -435,7 +438,7 @@ const Home = () => {
             >
               <p className="text-[#FF6B35] mb-2 text-sm uppercase tracking-wide font-semibold">About Company</p>
               <h2 className="text-4xl font-bold text-[#001B3D] mb-4">
-                World's Largest And Trusted Construction Company
+                World's Largest And Trusted Engineering Solutions Company
               </h2>
               <p className="text-gray-600 mb-6">
                 We provide comprehensive structural engineering design and detailing services for all types of structures, 
@@ -525,7 +528,7 @@ const Home = () => {
             }}
           >
             {/* Play Button */}
-            <div className="text-center z-10">
+            {/* <div className="text-center z-10">
               <button className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform mb-6 mx-auto">
                 <Play className="w-8 h-8 text-[#FF6B35] ml-1" fill="#FF6B35" />
               </button>
@@ -534,7 +537,7 @@ const Home = () => {
                   Watch how we transform your vision into reality with precision engineering and innovative solutions.
                 </p>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
@@ -622,7 +625,7 @@ const Home = () => {
                 gradient: 'from-orange-500 to-red-600'
               },
               {
-                img: 'https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=600',
+                img: img1,
                 icon: <CircleDot className="text-white" size={40} />,
                 title: 'Rebar Detailing',
                 desc: 'Expert rebar detailing with accurate bar bending schedules and placement drawings.',

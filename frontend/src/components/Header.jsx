@@ -67,7 +67,7 @@ Bangalore – 64</span>
               </span>
               <span className="flex items-center gap-2">
                 <Mail size={16} />
-                <span>info@example.com</span>
+                <span>info@glotekensol.com</span>
               </span>
               <span className="flex items-center gap-2">
                 <Users size={16} />
@@ -77,9 +77,9 @@ Bangalore – 64</span>
           </div>
           
           {/* Dark Blue Section with Social Icons */}
-          <div className="bg-[#001B3D] text-white py-3 px-8 flex items-center gap-3">
+          <div className="bg-[#001B3D] text-white py-2 px-8 flex items-center gap-3">
             <div className="border border-white/30 p-2 rounded cursor-pointer hover:bg-white/10 transition">
-              <Linkedin size={16} />
+              <Linkedin size={12} />
             </div>
           </div>
         </div>
@@ -87,7 +87,7 @@ Bangalore – 64</span>
 
       {/* Navigation */}
       <nav className="bg-white shadow-sm border-b sticky top-0 z-50">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 py-2">
           <div className="flex justify-between items-center ">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2">
@@ -149,7 +149,7 @@ Bangalore – 64</span>
                 {/* Two Panel Mega Menu */}
                 {activeDropdown === 'services' && (
                   <div className="absolute left-0 top-full pt-2 z-50">
-                    <div className="bg-white shadow-2xl rounded-lg overflow-hidden border border-gray-200 flex">
+                    <div className="shadow-2xl rounded-lg bg-[#FF6B35] overflow-hidden border border-gray-200 flex">
                       {/* Left Panel - Categories */}
                       <div className="w-64">
                         {servicesMenu.map((section, idx) => (

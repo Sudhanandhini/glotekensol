@@ -126,16 +126,15 @@ const Contact = () => {
     {
       icon: <Mail className="text-white" size={28} />,
       title: 'Email',
-      info: ['info@example.com', 'support@example.com'],
+      info: ['info@glotekensol.com', 'support@glotekensol.com'],
       color: 'from-blue-400 to-indigo-500'
     },
     {
       icon: <MapPin className="text-white" size={28} />,
       title: 'Address',
       info: ['Glotek Ensol Private Limited ', 
-'#67 Achutham, First Floor',  
-'Vidhana Soudha Layout Phase - 1  ',
-'7th Cross 60ft Road  ',
+'#67 Achutham, 7th Cross','Vidhana Soudha Layout Phase - 1  ',
+
 'Agrahara, Kogilu ', 
 'Bangalore – 64'],
       color: 'from-orange-400 to-red-500'
@@ -143,7 +142,7 @@ const Contact = () => {
     {
       icon: <Clock className="text-white" size={28} />,
       title: 'Working Hours',
-      info: ['Mon - Fri: 9AM - 6:30PM', 'Sat - Sun: Half Day'],
+      info: ['Mon - Fri: 9AM - 6:30PM'],
       color: 'from-blue-400 to-indigo-500'
     }
   ]
@@ -544,7 +543,7 @@ const Contact = () => {
             className="bg-[#001B3D] text-white px-10 py-4 rounded-lg hover:bg-[#002447] transition-all font-medium inline-flex items-center space-x-2 shadow-xl"
           >
             <Phone size={20} />
-            <span>Call Now: +1 (234) 567-8900</span>
+            <span>Call Now: +91 7892-504-910 / +91 9535-331-282</span>
           </motion.a>
         </motion.div>
       </section>

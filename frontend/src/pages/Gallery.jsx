@@ -75,35 +75,35 @@ const Gallery = () => {
 {
   id: 56,
   title: 'Communication tower steel model',
-  category: '3D Modelling',
+  category: '3D Model Snaps',
   img: img56,
   desc: 'High-rise steel communication tower model showcasing circular platforms, braced shafts, and integrated access structures designed for stability and equipment installation.'
 },
 {
   id: 57,
   title: 'Tower base structural detailing',
-  category: '3D Modelling',
+  category: '3D Model Snaps',
   img: img57,
   desc: 'Close-up 3D model of the tower base highlighting foundation interface, support framing, and platform connection geometry for fabrication and assembly.'
 },
 {
   id: 58,
   title: 'Observation tower structural model',
-  category: '3D Modelling',
+  category: '3D Model Snaps',
   img: img58,
   desc: 'Three-dimensional model of an observation tower structure with multi-level decks, vertical bracing, and reinforced core for enhanced load-bearing performance.'
 },
 {
   id: 59,
   title: 'Pedestrian bridge steel framing',
-  category: '3D Modelling',
+  category: '3D Model Snaps',
   img: img59,
   desc: '3D model of a pedestrian steel bridge featuring longitudinal girders, transverse trusses, and column supports designed for walkway circulation and load distribution.'
 },
 {
   id: 60,
   title: 'Covered walkway truss system',
-  category: '3D Modelling',
+  category: '3D Model Snaps',
   img: img60,
   desc: 'Steel truss walkway model illustrating roof framing, side bracings, and column arrangement for sheltered pedestrian movement and structural rigidity.'
 },
@@ -111,106 +111,106 @@ const Gallery = () => {
 {
   id: 47,
   title: 'Multi-level steel structure',
-  category: '3D Modelling',
+  category: '3D Model Snaps',
   img: img37,
   desc: 'Three-dimensional model representing a multi-level steel structure with coordinated framing and bracing systems.'
 },
 {
   id: 48,
   title: 'Process equipment support frame',
-  category: '3D Modelling',
+  category: '3D Model Snaps',
   img: img38,
   desc: 'Steel support frame model developed for industrial process equipment, including load paths and connection details.'
 },
 {
   id: 49,
   title: 'Structural steel tower model',
-  category: '3D Modelling',
+  category: '3D Model Snaps',
   img: img39,
   desc: '3D steel tower model showing column framing, bracing arrangements, and platform levels.'
 },
 {
   id: 50,
   title: 'Staircase and landing model',
-  category: '3D Modelling',
+  category: '3D Model Snaps',
   img: img40,
   desc: 'Three-dimensional staircase model with stringers, landings, handrails, and supporting steel members.'
 },
-{
-  id: 51,
-  title: 'Complex steel framing system',
-  category: '3D Modelling',
-  img: img41,
-  desc: 'Detailed 3D model of a complex steel framing system developed for coordination, clash detection, and fabrication.'
-},
+// {
+//   id: 51,
+//   title: 'Complex steel framing system',
+//   category: '3D Model Snaps',
+//   img: img41,
+//   desc: 'Detailed 3D model of a complex steel framing system developed for coordination, clash detection, and fabrication.'
+// },
 
 {
   id: 51,
   title: 'Long-span access platform model',
-  category: '3D Modelling',
+  category: '3D Model Snaps',
   img: img51,
   desc: 'Three-dimensional structural model of an extended access platform featuring modular walkway framing, braced supports, and handrail integration for industrial circulation.'
 },
 {
   id: 52,
   title: 'Process building steel framework',
-  category: '3D Modelling',
+  category: '3D Model Snaps',
   img: img52,
   desc: 'Detailed steel structure model of an industrial process building showing multi-level framing, equipment support beams, and vertical bracing for load transfer.'
 },
 {
   id: 53,
   title: 'Elevated conveyor gallery model',
-  category: '3D Modelling',
+  category: '3D Model Snaps',
   img: img53,
   desc: '3D model of an elevated conveyor gallery with enclosed walkway, truss support system, and foundation interface for material handling infrastructure.'
 },
 {
   id: 54,
   title: 'Equipment support structure',
-  category: '3D Modelling',
+  category: '3D Model Snaps',
   img: img54,
   desc: 'Compact steel platform model designed for equipment mounting, featuring deck grating support beams, access ladders, and safety railing details.'
 },
-{
-  id: 55,
-  title: 'Modular pipe rack framing',
-  category: '3D Modelling',
-  img: img55,
-  desc: 'Three-dimensional steel model of a modular pipe rack including transverse bents, longitudinal girders, and bracing members designed for utility routing.'
-},
+// {
+//   id: 55,
+//   title: 'Modular pipe rack framing',
+//   category: '3D Model Snaps',
+//   img: img55,
+//   desc: 'Three-dimensional steel model of a modular pipe rack including transverse bents, longitudinal girders, and bracing members designed for utility routing.'
+// },
 {
   id: 61,
   title: 'Structural walkway system',
-  category: '3D Modelling',
+  category: '3D Model Snaps',
   img: img61,
   desc: '3D steel walkway system featuring truss reinforcement, support columns, and platform connections for safe access across industrial facilities.'
 },
 {
   id: 63,
   title: 'Staircase connection detailing',
-  category: '3D Modelling',
+  category: '3D Model Snaps',
   img: img63,
   desc: 'High-detail 3D model of a steel staircase assembly showing tread plates, support brackets, and connection geometry for fabrication and site installation.'
 },
 {
   id: 64,
   title: 'Walkway support framing model',
-  category: '3D Modelling',
+  category: '3D Model Snaps',
   img: img64,
   desc: 'Three-dimensional walkway model featuring braced support columns, deck grating layout, and beam arrangements designed for safe industrial access.'
 },
 {
   id: 65,
   title: 'Multi-level stair and landing structure',
-  category: '3D Modelling',
+  category: '3D Model Snaps',
   img: img65,
   desc: 'Steel model of a multi-level stair system including intermediate landings, structural stringers, and railing integration for functional vertical circulation.'
 },
 {
   id: 66,
   title: 'Structural platform assembly',
-  category: '3D Modelling',
+  category: '3D Model Snaps',
   img: img66,
   desc: '3D model of an industrial platform showing vertical bracing, deck framing, and equipment support areas engineered for stability and operational requirements.'
 },
